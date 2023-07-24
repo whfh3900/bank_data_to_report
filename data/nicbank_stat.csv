@@ -1,0 +1,188 @@
+id,col_table,col_mean,col_name,col_types,col_explain,code,col_remake
+1,CI_INFO,정보주체(CI),ci_num,VARCHAR,,,
+2,CI_INFO,연령,ci_age,INT,CI의 연령,,
+3,CI_INFO,성별,ci_gender,VARCHAR,CI의 성별,C001,
+4,CI_INFO,내외국인구분,kor_types,VARCHAR,CI 내외국인 구분 코드,C002,
+5,ACCOUNT_TRANS,계좌번호,account_num,TEXT,CI의 계좌번호,,
+6,ACCOUNT_TRANS,금융기관코드,account_org_code,VARCHAR,금융기관코드,C006,
+7,ACCOUNT_TRANS,통화코드,account_currency_code,VARCHAR,해당 계좌번호에 적용된 통화코드 (ISO 4217 준용),C003,
+8,ACCOUNT_TRANS,거래일시 또는 거래일자,account_trans_dtime,DATETIME,"거래가 일어난 날짜와 시간(YYYYMMDDhhmmss)
+- 시각정보가 없는 경우 거래일자인 YYYYMMDD 회신(일부 기관의 경우 거래일자 + 거래번호로 관리)",,
+9,ACCOUNT_TRANS,거래유형(코드),account_trans_type,VARCHAR,"	거래의 유형 구분",C004,
+10,ACCOUNT_TRANS,거래구분,trans_class,TEXT,"해당 거래의 구분
+(예 : 창구, 인터넷뱅킹, ATM 등)
+- 텍스트로 전송",,
+11,ACCOUNT_TRANS,거래금액,account_trans_amt,INT,해당 계좌에서 일어난 거래의 금액,,
+12,ACCOUNT_TRANS,거래 후 잔액,account_balance_amt,INT,거래가 일어난 후 잔액,,
+13,ACCOUNT_TRANS,적요,account_trans_memo,LONGTEXT,"계좌입출금 거래 관련 수취·송금인 계좌·성명·메모 등이 기록된 정보로서 정보주체가 직접 기록한 내용
+(자동 입력에 의한 정보 포함)
+- 정보주체가 전송요구 시 적요 정보를 전송요구한 경우 
+(정보제공-공통-002 is_consent_trans_memo='true')
+회신하고, 그렇지 않은 경우 미회신",,
+14,ACCOUNT_TRANS,고객구분,customer_types,VARCHAR,"개인, 기업, 기타",C005,
+15,ACCOUNT_TRANS,거래상대 기관코드,other_org_code,VARCHAR,"거래가 발생했을 때 상대 계좌번호의 금융 기관 코드
+지원 API로부터 배포되는 기관코드 중 앞 2자리를 제외한 8자리
+- 기관코드는 업권코드(2자리), 대표기관코드(4자리), 지점코드(4자리)",C006,
+16,ACCOUNT_TRANS,거래상대 계좌번호,other_account_num,TEXT,거래가 발생했을 때 상대 계좌번호,,
+17,ACCOUNT_TRANS,거래구분코드,trans_class_code,VARCHAR,"당행, 타행, 오픈뱅킹, ATM, 자동이체 등",C007,
+18,ACCOUNT_TRANS,디바이스정보,device_types,VARCHAR,거래가 발생했을 때 디바이스 정보,C008,
+19,ACCOUNT_TRANS,당타행구분코드,org_types,VARCHAR,"당행, 타행 거래 구분 코드",C009,
+20,ACCOUNT_TRANS,본인계좌구분코드,my_account_code,VARCHAR,"해당 거래상대 식별값이 정보주체 본인 소유가 확인된 경우, 
+본인 계좌 확인 코드",C010,
+21,ACCOUNT_TRANS,지역코드,account_country_code,VARCHAR,"거래가 발생했을 때 지역. 시군구까지 정보
+통계지리정보서비스(SGIS) 2021년도 6월 자료 기준 코드작성",C011,
+22,PAY_TRANS,권면ID,fob_id,TEXT,데이터 보유자가 부여한 권면의 고유 식별자,,
+23,PAY_TRANS,계정식별값,pay_account_id,TEXT,"	권면 하나에 다수의 계정이 연결되어 있는 기관 (예: 네이버파이낸셜)의 경우 설정 (전금-001 API 회신된 account_id)",,
+24,PAY_TRANS,상대 권면ID,other_pay_id,TEXT,,,
+25,PAY_TRANS,상대 계정식별값,other_pay_account,TEXT,,,
+26,PAY_TRANS,충전지불수단기관(코드),charge_org_code,VARCHAR,"	자동충전을 위해 등록된 결제(충전)수단을 발행한 금융기관의 코드
+- 지원 API로부터 배포되는 기관코드 중 앞 2자리를 제외한 8자리 회신 (자세한 내용은 서비스 가이드라인 참조)
+- 기관코드는 업권코드(2자리), 대표기관코드(4자리), 지점코드(4자리)로 구성되는데, 여러 업권의 정보를 보유한 금융기관은 다수의 기관코드를 보유(업권별 기관코드 할당)할 수 있기 때문에 업권코드를 제외한 8자리 코드를 사용하여 유일성 확보
+- 종합포털로부터 기관코드를 발급받지 않는 기관(예: 상품권 발행사 등)들의 경우 기타기관코드인 “ZZZZ0000” 회신
+- 저축은행에 개설된 계좌의 정보는 저축은행중앙회에 집중되는 과정에서 계좌 개설 기관이 구분되지 않기 때문에, 개별 저축은행의 기관코드가 아닌, 저축은행중앙회의 기관코드로 전송될 수 있음",C006,
+27,PAY_TRANS,충전지불수단식별키,charge_account_num,TEXT,"	자동충전을 위해 등록된 결제(충전)수단을 식별하기 위한 값- 1. 카드: 카드번호(마스킹 포함)
+- 2. 은행: 계좌번호
+- 3. 선불(머니): 선불지급수단명
+- 4. 무통장: ""무통장""
+- 5. 기타: ""기타""
+- 해당 충전지불수단이 정보주체 본인 소유가 확인된 경우에만 회신하며, 확인이 불가하거나 타인의 소유일 경우에는 미회신",,
+28,PAY_TRANS,충전조건(코드),charge_option,VARCHAR,"	선불전자지급수단의 잔액을 특정 기준에 따라 자동충전하기 위한 조건",C012,
+29,PAY_TRANS,기준날짜,charge_day,VARCHAR,"	충전 기준날짜 (날짜 'DD' 2자리)
+- charge_option이 01일 경우",C020,
+30,PAY_TRANS,기준금액,charge_base_amt,INT,"	하한 기준금액
+- charge_option이 02일 경우",,
+31,PAY_TRANS,충전금액,charge_amt,INT,"충전될 금액
+- charge_option이 01 또는 02일 경우",,
+32,PAY_TRANS,거래유형(코드),pay_trans_type,VARCHAR,"해당 거래의 구분 코드
+- [첨부9] 전자금융업 거래유형 코드 중 선불지급수단정보에 해당",C013,
+33,PAY_TRANS,거래일시 또는 거래일자,pay_trans_dtime,DATETIME,"해당 거래가 이루어진 일시(YYYYMMDDhhmmss)
+- 시각 정보가 없을 경우 거래일자인 YYYYMMDD 회신
+(일부 기관의 경우 거래일자+거래번호로 관리)",,
+34,PAY_TRANS,거래금액,pay_trans_amt,INT,"	해당 거래의 금액",,
+35,PAY_TRANS,거래 후 잔액,pay_balance_amt,INT,"	해당 거래 후 잔액
+- 잔액정보를 관리하는 기관만 회신",,
+36,PAY_TRANS,거래상대 기관코드,pay_trans_org_code,VARCHAR,"	거래 상대 금융기관의 코드
+- 지원 API로부터 배포되는 기관코드 중 앞 2자리를 제외한 8자리 회신 (자세한 내용은 서비스 가이드라인 참조)
+- 기관코드는 업권코드(2자리), 대표기관코드(4자리), 지점코드(4자리)로 구성되는데, 여러 업권의 정보를 보유한 금융기관은 다수의 기관코드를 보유(업권별 기관코드 할당)할 수 있기 때문에 업권코드를 제외한 8자리 코드를 사용하여 유일성 확보
+- <참고>
+충전 :충전에 사용된 기관
+송금: 송금 대상 기관
+송금수취: 송금인의 기관
+적립: 적립이 이뤄진 기관
+결제: 결제가 이루어진 상대기관
+- 종합포털로부터 기관코드를 발급받지 않는 기관(예: 상품권 발행사 등)들의 경우 기타기관코드인 “ZZZZ0000” 회신
+- 저축은행에 개설된 계좌의 정보는 저축은행중앙회에 집중되는 과정에서 계좌 개설 기관이 구분되지 않기 때문에, 개별 저축은행의 기관코드가 아닌, 저축은행중앙회의 기관코드로 전송될 수 있음",C006,
+37,PAY_TRANS,거래상대 식별값,pay_trans_id,TEXT,"거래 대상 금융기관이 발행한 거래 상대의 식별값
+- 1. 카드: 카드번호(마스킹포함)
+- 2. 은행: 계좌번호
+- 3. 선불: 권면ID(명) 등
+- 카드번호일 경우는 카드업권 마스킹 규칙 준용
+- 해당 거래상대 식별값이 정보주체 본인 소유가 확인된 경우에만 회신하며, 확인이 불가하거나 타인의 소유일 경우에는 미회신",,
+38,PAY_TRANS,거래메모,pay_trans_memo,LONGTEXT,"해당 거래의 부가 정보
+- 예 : 상품권명, 포인트명, 기타, 송금인/수취인명, 적립서비스명 등
+- 정보주체가 전송요구 시 거래메모 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_trans_memo='true') 회신하고, 그렇지 않은 경우 미회신",,
+39,PAY_TRANS,가맹점명,pay_merchant_name,TEXT,"결제 또는 결제취소 가맹점명
+- 정보주체가 전송요구 시 가맹점명/사업자등록번호 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_merchant_name_regno='true') 회신하고, 그렇지 않은 경우 미회신",,
+40,PAY_TRANS,상품(구매) 분류(코드),pay_trans_category,VARCHAR,"해당 결제를 통해 구매한 상품 또는 서비스의 구분
+- [첨부10] 상품(구매) 분류 코드 참조
+- 거래내역의 카테고리가 복수 개인 경우(상품을 복수 개 구매 등), 대표상품의 카테고리만 회신
+- 정보주체가 전송요구 시 상품구매정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_trans_category='true') 회신하고, 그렇지 않은 경우 미회신",C014,
+41,PAY_TRANS,결제방법(코드),pay_pay_method,VARCHAR,"온라인 결제, 오프라인 결제 구분",C015,
+42,PRECARD_PAYMENTS,선불카드 식별자,pp_id,TEXT,정보제공자가 부여한 선불카드 식별 값,,
+43,PRECARD_PAYMENTS,승인번호,prepaid_approved_num,TEXT,카드 승인 시 각 사에서 발행한 번호,,
+44,PRECARD_PAYMENTS,승인일시,prepaid_approved_dtime,DATETIME,"	금융소비자가 물품을 구매하거나 용역을 제공받은 날짜와 시간",,
+45,PRECARD_PAYMENTS,결제상태(코드),prepaid_status,VARCHAR,"	해당 승인번호의 조회시점 결제상태",C016,
+46,PRECARD_PAYMENTS,정정 또는 승인취소 일시,prepaid_trans_dtime,DATETIME,"	정정 또는 승인취소가 발생한 일시
+- 결제상태(코드)가 '02'인 경우 : 취소일시
+- 결제상태(코드)가 '03'인 경우 : 정정일시",,
+47,PRECARD_PAYMENTS,가맹점명,prepaid_merchant_name,TEXT,"	금융소비자가 물품을 구매하거나 용역을 제공받은 곳의 명칭
+- 정보주체가 전송요구 시 가맹점명/사업자등록번호 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_merchant_name_regno=“true”) 회신하고, 그렇지 않은 경우 미회신",,
+48,PRECARD_PAYMENTS,가맹점 사업자등록번호,prepaid_merchant_regno,TEXT,"가맹점의 사업자등록번호
+- '-' 포함
+- 정보주체가 전송요구 시 가맹점명/사업자등록번호 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_merchant_name_regno=“true”) 회신하고, 그렇지 않은 경우 미회신",,
+49,PRECARD_PAYMENTS,이용금액,prepaid_approved_amt,INT,"	가맹점에서 이용한 금액 (할부 시 전체금액으로)",,
+50,PRECARD_PAYMENTS,정정후 금액,modified_amt,INT,"	정정 후 이용 금액
+- 결제상태(코드)가 ‘03’인 경우만 회신",,
+51,PRECARD_PAYMENTS,전체 할부회차,prepaid_total_install_cnt,INT,해당 상환거래 금액 중 이자,,
+52,PRECARD_PAYMENTS,결제방법(코드),prepaid_pay_method,VARCHAR,"온라인 결제, 오프라인 결제 구분",C015,
+53,CARD_PAYMENTS,승인일시,domestic_approved_dtime,DATETIME,금융소비자가 물품을 구매하거나 용역을 제공받은 날짜와 시간,,
+54,CARD_PAYMENTS,결제상태(코드),domestic_status,VARCHAR,승인/승인취소/정정,C016,
+55,CARD_PAYMENTS,사용구분(신용/체크)(코드),domestic_pay_type,VARCHAR,해당 결제의 신용/체크 구분(결제타입),C017,
+56,CARD_PAYMENTS,가맹점명,domestic_merchant_name,TEXT,"금융소비자가 물품을 구매하거나 용역을 제공받은 곳의 명칭
+- 정보주체가 전송요구 시 가맹점명 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_merchant_name_regno='true') 회신하고, 그렇지 않은 경우 미회신",,
+57,CARD_PAYMENTS,가맹점 사업자등록번호,domestic_merchant_regno,TEXT,"가맹점의 사업자등록번호
+- “-” 포함
+- 정보주체가 전송요구 시 가맹점명/사업자등록번호 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_merchant_name_regno=“true”) 회신하고, 그렇지 않은 경우 미회신",,
+58,CARD_PAYMENTS,이용금액,domestic_approved_amt,INT,가맹점에서 이용한 금액 (할부 시 전체금액으로),,
+59,CARD_PAYMENTS,전체 할부회차,domestic_total_install_cnt,INT,"나누어 상환하기로 계약한 원리금의 전체 회차
+- 일시불일 경우 미회신",,
+60,CARD_PAYMENTS,승인일시,overseas_approved_dtime,DATETIME,금융소비자가 물품을 구매하거나 용역을 제공받은 날짜와 시간,,
+61,CARD_PAYMENTS,결제상태(코드),overseas_status,VARCHAR,승인/승인취소/정정,C016,
+62,CARD_PAYMENTS,사용구분(신용/체크)(코드),overseas_pay_type,VARCHAR,신용/체크(결제타입),C017,
+63,CARD_PAYMENTS,가맹점명,overseas_merchant_name,TEXT,"금융소비자가 물품을 구매하거나 용역을 제공받은 곳의 명칭
+- 해외승인의 경우 가맹점명이 없는 경우가 존재하며, 이 경우 미회신
+- 정보주체가 전송요구 시 가맹점명 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_merchant_name_regno='true') 회신하고, 그렇지 않은 경우 미회신",,
+64,CARD_PAYMENTS,이용금액,overseas_approved_amt,INT,가맹점에서 이용한 금액(결제 시 통화코드에 해당하는 금액),,
+65,CARD_PAYMENTS,결제(승인)국가코드,country_code,VARCHAR,카드 승인 국가의 국가코드 (ISO 1366-1 alpha-2 준용),C018,
+66,CARD_PAYMENTS,결제(승인)시 통화코드,overseas_currency_code,VARCHAR,"	카드 승인 시 선택한 통화코드(ISO 4217 준용)
+- 통화코드값이 명시되어있지 않을 경우 KRW(원)",C003,
+67,CARD_PAYMENTS,원화,krw_amt,FLOAT,"	원화로 환산한 금액
+- 원화금액이 승인시점에 확정이 되는 기관의 경우 회신(매입시점에 확정되는 기관의 경우, 미회신)",,
+68,CONNECT_PAYMENTS,결제유형(코드),connect_trans_type,VARCHAR,"해당 결제의 구분 코드
+- [첨부9] 전자금융업 거래유형 코드 중 전자결제정보에 해당",C019,
+69,CONNECT_PAYMENTS,결제일시 또는 결제취소일시,connect_trans_dtime,DATETIME,"결제 또는 결제취소(환불 포함) 일시(YYYYMMDDhhmmss)
+- 시각 정보가 없을 경우 결제일자(또는 결제취소일자)인 YYYYMMDD 회신 (일부 기관의 경우 결제일자+결제번호로 관리",,
+70,CONNECT_PAYMENTS,결제금액,connect_trans_amt,INT,결제 또는 결제취소 총 금액,,
+71,CONNECT_PAYMENTS,결제수단 기관(코드),connect_trans_org_code,VARCHAR,"거래 대상 금융기관의 코드
+- 지원 API로부터 배포되는 기관코드 중 앞 2자리를 제외한 8자리 회신 (자세한 내용은 서비스 가이드라인 참조)
+- 기관코드는 업권코드(2자리), 대표기관코드(4자리), 지점코드(4자리)로 구성되는데, 여러 업권의 정보를 보유한 금융기관은 다수의 기관코드를 보유(업권별 기관코드 할당)할 수 있기 때문에 업권코드를 제외한 8자리 코드를 사용하여 유일성 확보
+- 종합포털로부터 기관코드를 발급받지 않는 기관(예: 상품권 발행사 등)들의 경우 기타기관코드인 “ZZZZ0000” 회신
+- 저축은행에 개설된 계좌의 정보는 저축은행중앙회에 집중되는 과정에서 계좌 개설 기관이 구분되지 않기 때문에, 개별 저축은행의 기관코드가 아닌, 저축은행중앙회의 기관코드로 전송될 수 있음",C006,
+72,CONNECT_PAYMENTS,결제수단 식별키,pay_id,TEXT,"결제에 사용된 결제수단의 식별 값
+- <식별값>
+카드: 카드번호(마스킹포함)
+은행: 계좌번호
+선불(머니): 선불지급수단명
+무통장: ""무통장""
+기타: ""기타""
+- 해당 결제수단이 정보주체 본인 소유가 확인된 경우에만 회신하며, 확인이 불가하거나 타인의 소유일 경우에는 미회신",,
+73,CONNECT_PAYMENTS,상품(구매) 분류(코드),connect_trans_category,VARCHAR,"	해당 결제를 통해 구매한 상품 또는 서비스의 구분
+- [첨부10] 상품(구매) 분류 코드 참조
+- 거래내역의 카테고리가 복수 개인 경우(상품을 복수 개 구매 등), 대표상품의 카테고리만 회신
+- 정보주체가 전송요구 시 상품구매정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_trans_category='true') 회신하고, 그렇지 않은 경우 미회신",C014,
+74,CONNECT_PAYMENTS,결제방법(코드),connect_pay_method,VARCHAR,"	온라인 결제, 오프라인 결제 구분",C015,
+75,CHARGE_PAYMENTS,거래유형(코드),charge_trans_type,VARCHAR,"해당 거래의 구분 코드
+- [첨부9] 전자금융업 거래유형 코드 중 선불지급수단정보에 해당",C013,
+76,CHARGE_PAYMENTS,거래일시 또는 거래일자,charge_trans_dtime,DATETIME,"해당 거래가 이루어진 일시(YYYYMMDDhhmmss)
+- 시각 정보가 없을 경우 거래일자인 YYYYMMDD 회신(일부 기관의 경우 거래일자+거래번호로 관리",,
+77,CHARGE_PAYMENTS,거래금액,charge_trans_amt,INT,"	해당 거래의 금액",,
+78,CHARGE_PAYMENTS,거래 후 잔액,charge_balance_amt,INT,"해당 거래 후 잔액
+- 잔액정보를 관리하는 기관만 회신",,
+79,CHARGE_PAYMENTS,거래상대 기관코드,charge_trans_org_code,VARCHAR,"거래 상대 금융기관의 코드
+- 지원 API로부터 배포되는 기관코드 중 앞 2자리를 제외한 8자리 회신 (자세한 내용은 서비스 가이드라인 참조)
+- 기관코드는 업권코드(2자리), 대표기관코드(4자리), 지점코드(4자리)로 구성되는데, 여러 업권의 정보를 보유한 금융기관은 다수의 기관코드를 보유(업권별 기관코드 할당)할 수 있기 때문에 업권코드를 제외한 8자리 코드를 사용하여 유일성 확보
+- <참고>
+충전 :충전에 사용된 기관
+송금: 송금 대상 기관
+송금수취: 송금인의 기관
+적립: 적립이 이뤄진 기관
+결제: 결제가 이루어진 상대기관
+- 종합포털로부터 기관코드를 발급받지 않는 기관(예: 상품권 발행사 등)들의 경우 기타기관코드인 “ZZZZ0000” 회신
+- 저축은행에 개설된 계좌의 정보는 저축은행중앙회에 집중되는 과정에서 계좌 개설 기관이 구분되지 않기 때문에, 개별 저축은행의 기관코드가 아닌, 저축은행중앙회의 기관코드로 전송될 수 있음",C006,
+80,CHARGE_PAYMENTS,거래상대 식별값,charge_trans_id,TEXT,"	거래 대상 금융기관이 발행한 거래 상대의 식별값
+- 1. 카드: 카드번호(마스킹포함)
+- 2. 은행: 계좌번호
+- 3. 선불: 권면ID(명) 등
+- 카드번호일 경우는 카드업권 마스킹 규칙 준용
+- 해당 거래상대 식별값이 정보주체 본인 소유가 확인된 경우에만 회신하며, 확인이 불가하거나 타인의 소유일 경우에는 미회신",,
+81,CHARGE_PAYMENTS,상품(구매) 분류(코드),charge_trans_category,VARCHAR,"	해당 결제를 통해 구매한 상품 또는 서비스의 구분
+- [첨부10] 상품(구매) 분류 코드 참조
+- 거래내역의 카테고리가 복수 개인 경우(상품을 복수 개 구매 등), 대표상품의 카테고리만 회신
+- 정보주체가 전송요구 시 상품구매정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_trans_category='true') 회신하고, 그렇지 않은 경우 미회신",C014,
+82,CHARGE_PAYMENTS,결제방법(코드),charge_pay_method,VARCHAR,"온라인 결제, 오프라인 결제 구분",C015,
+83,TELECOMS_TRANS,이용일시,telecoms_trans_date,DATETIME,소액결제를 이용한 일시,,
+84,TELECOMS_TRANS,결제금액,telecoms_trans_amt,INT,"해당 소액결제의 이용금액
+- 취소의 경우 마이너스 금액 전송",,
+85,TELECOMS_TRANS,가맹점명,telecoms_merchant_name,TEXT,"결제 가맹점명 (PG사 명)
+- 구글콘텐츠, 페이레터, 모빌리언스 등
+- 정보주체가 전송요구 시 가맹점명/사업자등록번호 정보를 전송요구한 경우 (정보제공-공통-002의 is_consent_merchant_name_regno='true') 회신하고, 그렇지 않은 경우 미회신",,
