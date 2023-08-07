@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from openpyxl.styles import Border, Side, PatternFill, Color, Alignment
 from openpyxl.styles.fonts import Font
 import os 

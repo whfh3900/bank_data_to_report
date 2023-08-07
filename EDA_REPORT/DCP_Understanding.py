@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # 저작권       닉컴퍼니
 # title     데이터 이해 : 데이터에 대한 정보확인
 # filename  DCP_Understanding.py
@@ -38,130 +40,86 @@
 #			 - input : 데이터(dataframe), 금융데이터 명세서
 #			 - output : 필드항목별 이상치 index(json)
 #=========================================================
-#=========================================================
-# V0.12
-# 2022.02.15
-# 1. dcp_types 코드 수정 : 금융데이터에서 타입을 가져오는 것으로 수정
-#=========================================================
-# V0.13
-# 2022.02.24
-# 1. dcp_types 코드 수정 : DB설계 수정으로 인한 수정
-#=========================================================
-# V0.14
-# 2022.03.11
-# 1. dcp_types 코드 수정 : DB설계 수정으로 인한 수정
-# 2. dcp_unique 코드 수정 : DB설계 수정으로 인한 수정
-#=========================================================
-# V0.15
-# 2022.05.20
-# 1. dcp_outliers 추가
-# 2. 수치형 변수일때 이상치 리스트 추가
-#=========================================================
 
 
 import pandas as pd
 import numpy as np
-
+import sys
 
 class SetDataFrame():
-    def __init__(self, df, stat, code):
+    def __init__(self, df, bank, stat, code):
         self.df = df
+        self.bank = bank
         self.stat = stat
         self.code = code
-        self.df = self.df.replace('',np.nan)            
+        self.df = self.df.replace('',np.nan)
 
     def dcp_shape(self):
         return self.df.shape
 
-    ##### v0.14 ##### 
     def dcp_types(self):
-        ##### 페이관련 테이블 마지막 컬럼에 이상한 컬럼이 계속생기는데 원인을 모르겠음
         types_dict = dict()
         for col in self.df.columns:
             try:
-                types_dict[col] = self.stat[self.stat['col_name']==col]['col_types'].iloc[0]
+                types_dict[col] = self.stat[self.stat['COLUMN']==col]['TYPE'].iloc[0]
             except Exception as e:
-                print(e, '"{}"'.format(col))
+                print("Error: 데이터 타입을 읽는 중 해당 에러가 발생했습니다. %s:%s"%(e, col))
         return types_dict
-            
-   
 
-    ##### v0.15 #####
+
+
     def dcp_missing(self):
         missing = dict()
         for col in self.df.columns:
-            # org_code 조건문은 코드표 완성되면 삭제
-            ##### 페이관련 테이블 마지막 컬럼에 이상한 컬럼이 계속생기는데 원인을 모르겠음
-            try:
-                if 'org_code' in col:
-                    missing[col] = list()
-                else:
-                    missing[col] = self.df[self.df[col].isnull()].index.tolist()
-            except Exception as e:
-                print(e, '"{}"'.format(col))
+            missing[col] = self.df[self.df[col].isnull()].index.tolist()
         return missing
 
 
-    ##### v0.14 #####
     def dcp_unique(self):
         unique = dict()
         for col in self.df.columns:
             ##### 페이관련 테이블 마지막 컬럼에 이상한 컬럼이 계속생기는데 원인을 모르겠음
-            try:
-                types = self.stat[self.stat['col_name']==col]['col_types'].iloc[0]
-            except Exception as e:
-                print(e, '"{}"'.format(col))
-                break
-            if (types in ['VARCHAR', 'BINARY']) and (col != 'ci_num'):
-                df_col = self.df[col].astype(str).copy()
-                code_value = str(self.stat[self.stat['col_name']==col]['code'].iloc[0])
-                code_list = list(map(str, self.code[self.code['code']==code_value]['code_values']))
+            types = self.dcp_types().values()
+            if (types in ['VARCHAR', 'BINARY']):
+                code_value = str(self.stat[self.stat['COLUMN']==col]['CODE'].iloc[0])
+                code_list = list(map(str, self.code[(self.code['CODE']==self.bank) & (self.code['CODE']==code_value)]['VALUE']))
                 try:
                     self.df[col] = self.df[col].astype('float64')
                     self.df[col] = self.df[col].astype('int32')
                     self.df[col] = self.df[col].astype('string')
                 except Exception as e:
-                    print(e, '"{}"'.format(col))
+                    print("Error: 데이터 unique 값을 읽는 중 해당 에러가 발생했습니다. %s:%s"%(e, col))
                 unique[col] = [i for i in self.df[col].unique() if i in code_list]
-            elif (types in ['VARCHAR', 'BINARY']) and (col == 'ci_num'):
+            elif (types in ['VARCHAR', 'BINARY']):
                 unique[col] = list(self.df[col].unique())
             else:
                 unique[col] = list()
         return unique
         
 
-    ##### v0.15 #####
     def dcp_outliers(self):
-        import sys
+        
         outliers = dict()
         for col in self.df.columns:
-            ##### 페이관련 테이블 마지막 컬럼에 이상한 컬럼이 계속생기는데 원인을 모르겠음
-            try:
-                types = self.stat[self.stat['col_name']==col]['col_types'].iloc[0]
-            except Exception as e:
-                print(e, '"{}"'.format(col))
-                break
-            # org_code 조건문은 코드표 완성되면 삭제
-            if (col == 'ci_num') or ('org_code' in col) or (types not in ['BINARY','VARCHAR']):
+            types = self.dcp_types().values()
+            if (types not in ['BINARY','VARCHAR']):
                 outliers[col] = list()
             elif types in ['INT','FLOAT']:
                 self.df[col] = pd.to_numeric(self.df[col], errors='coerce')
                 outliers[col] = self.df[self.df[col].isnull()].index.tolist()
             else:
-                code_value = str(self.stat[self.stat['col_name']==col]['code'].iloc[0])
+                code_value = str(self.stat[self.stat['COLUMN']==col]['CODE'].iloc[0])
                 ##### 만약 컬럼에 null이 들어갔을경우 해당컬럼은 저절로 float 형식으로 바뀐다
                 ##### 여기선 code_values가 int 형식이므로 float 형식으로 바꿔서 진행한다.
                 if (self.df[col].isnull().sum()) > 0:
-                    code_values = list(map(str, list(map(float, self.code[self.code['code']==code_value]['code_values']))))
+                    code_values = list(map(str, list(map(float, self.code[self.code['CODE']==code_value]['VALUE']))))
                 else:
                     try:
                         self.df[col] = self.df[col].astype('float64')
                         self.df[col] = self.df[col].astype('int32')
                         self.df[col] = self.df[col].astype('string')
                     except Exception as e:
-                        print(e)
-                        print(self.df[col].head(), code_values)
-                    code_values = list(map(str, self.code[self.code['code']==code_value]['code_values']))
-                
+                        print("Error: 데이터 이상치를 찾는 중 해당 에러가 발생했습니다. %s:%s"%(e, col))
+                    code_values = list(map(str, self.code[self.code['CODE']==code_value]['VALUE']))
                 outliers[col] = self.df[(~self.df[col].isin(code_values))&(self.df[col].notnull())].index.tolist()
         return outliers
