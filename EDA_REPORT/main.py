@@ -44,8 +44,10 @@ datetime.datetime.now(KST)
 
 #### input
 path = cc.get_map("report")["path"]
-bank = cc.get_map("report")["data"]
-result_report_file_path = os.path.join(cc.get_map("report")["output"], "%s_report_example.csv"%bank)
+bank = cc.get_map("report")["bank"]
+data = cc.get_map("report")["data"]
+
+result_report_file_path = os.path.join(cc.get_map("report")["output"], "%s_report_example.csv"%data)
 company = cc.get_map("report")["company"]
 user = cc.get_map("report")["user"]
 
@@ -57,7 +59,7 @@ stat = pd.read_csv(cc.get_map("report")["stat_file"], encoding="cp949")
 code = pd.read_csv(cc.get_map("report")["code_file"], encoding="cp949")
 
 ### 데이터
-df = pd.read_csv(os.path.join(path, bank+".csv"), encoding="cp949")
+df = pd.read_csv(os.path.join(path, data+".csv"), encoding="cp949")
 
 
 ######### 시트생성
@@ -84,7 +86,7 @@ sheet1['D24'] = '작성시간'
 sheet1['D25'] = '작성자'
 
 sheet1['E21'] = company
-sheet1['E22'] = bank
+sheet1['E22'] = data
 sheet1['E23'] = today
 sheet1['E24'] = nowtime
 sheet1['E25'] = user
