@@ -1,8 +1,0 @@
-BANK,COLUMN,MEAN,TYPE,EXPLAIN,CODE,REMAKE
-URI,BAS_YM,거래년월,VARCHAR,"- 거래가 발생한 년도와 일자
-- 0~4자리 까지는 년도, 5~6글자는 월로 표시.",,
-URI,BAS_DT,거래시간대,VARCHAR,- 거래발생일,,
-URI,TRANS_MD,거래구분,BINARY,"- 지급, 입금으로 이루어진 구분코드",,
-URI,ATS_KDCD_DTL,거래유형,VARCHAR,- 거래유형,0,
-URI,DPS_TRN_AM,거래금액,INT,- 거래금액,,
-URI,TEXTS_1,적요,TEXT,- 적요,,
