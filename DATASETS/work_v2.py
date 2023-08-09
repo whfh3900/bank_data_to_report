@@ -9888,13 +9888,11 @@ def case_89_2(path):
         min_amou = df.iloc[i]['최소금액']
         max_amou = df.iloc[i]['최대금액']
 
-
         token_2 = "수당"
         token_2_mean = token_2
         object_2 = "금융용어"
         
         tokens = del_sw(text_pre.replace(token_2, ""))
-
 
         word_num = 0
         for i in tokens.split():
