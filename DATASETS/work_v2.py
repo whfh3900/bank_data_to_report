@@ -4755,11 +4755,14 @@ def case_43(path):
         min_amou = df.iloc[i]['최소금액']
         max_amou = df.iloc[i]['최대금액']
         
-        token_2 = "인센티브"
-        token_2_mean = token_2
-        object_2 = "금융용어"
         
-        tokens = del_sw(text_pre.replace("인센티브", ""))
+        for i in ["인센티브", "인센티", "인센"]:
+            if text_pre.endswith(i):
+                token_2 = i
+                token_2_mean = "인센티브"
+                object_2 = "금융용어"
+                tokens = del_sw(text_pre.replace(token_2, ""))
+                break
 
         word_num = 0        
         for i in tokens.split():
@@ -4775,7 +4778,7 @@ def case_43(path):
                                     '출처번호': sour_num,
                                     '적요구조': text_stru,
                                     '적요구조일련번호': text_stru_num,
-                                    '적요 설명': "인센티브로 입금된 내역의 적요이다." if tran_diff == "입금" else "인센티브로 이체한 내역의 적요이다.",
+                                    '적요 설명': "%s 으로(로) 입금된 내역의 적요이다."%token_2_mean if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%token_2_mean,
                                     '거래코드': tran_code,
                                     '분류': clas,
                                     '분류번호': clas_num,
@@ -4797,7 +4800,7 @@ def case_43(path):
                                 '출처번호': sour_num,
                                 '적요구조': text_stru,
                                 '적요구조일련번호': text_stru_num,
-                                '적요 설명': "인센티브로 입금된 내역의 적요이다." if tran_diff == "입금" else "인센티브로 이체한 내역의 적요이다.",
+                                '적요 설명': "%s 으로(로) 입금된 내역의 적요이다."%token_2_mean if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%token_2_mean,
                                 '거래코드': tran_code,
                                 '분류': clas,
                                 '분류번호': clas_num,
@@ -5165,6 +5168,7 @@ def case_46(path):
 
 
 
+##  나중에
 def case_47(path):
     ### input: DataFrame
     ### output: DataFrame
@@ -5188,38 +5192,43 @@ def case_47(path):
         min_amou = df.iloc[i]['최소금액']
         max_amou = df.iloc[i]['최대금액']
         
-        token_1 = "보조금"
-        token_1_mean = token_1
-        object_1 = "금융용어"   
         
-        tokens = del_sw(text_pre.replace("보조금", ""))
+        token_1 = ""
+        token_1_mean = ""
+        tokens = text_pre
+        for i in stoc_dict.keys():
+            if text_pre.startswith(i):
+                token_1 = i
+                token_1_mean = stoc_dict.get(token_1, token_1)
+                object_1 = "증권/자산운용사명"
+                tokens = del_sw(text_pre.replace(token_1, ""))
+                break
         
-        new_df = new_df.append({'확인용': num,
-                                '적요': text,
-                                '적요일련번호': text_num,
-                                '입출금구분': tran_diff,
-                                '데이터셋출처': data_sour,
-                                '출처번호': sour_num,
-                                '적요구조': text_stru,
-                                '적요구조일련번호': text_stru_num,
-                                '적요 설명': "보조금으로 입금된 내역의 적요이다." if tran_diff == "입금" else "보조금으로 이체한 내역의 적요이다.",
-                                '거래코드': tran_code,
-                                '분류': clas,
-                                '분류번호': clas_num,
-                                '최소금액': min_amou,
-                                '최대금액': max_amou,
-                                '단어': token_1,
-                                '단어일련번호':0,
-                                '단어의미':token_1_mean,
-                                '개체명': object_1,
-                                '완료여부':1,
-                                }, ignore_index=True)
-        word_num = 1
-        for i in tokens.split():
-            
-            token_2 = i
-            token_2_mean = token_2
-            object_2 = "사유"
+        token_2 = ""
+        token_2_mean = token_2
+        object_2 = "금융용어" 
+        token_3 = ""
+        token_3_mean = token_3
+        object_3 = "금융용어"
+
+        for i in securities:
+            if i in text_pre:
+                token_2 = i
+                token_2_mean = token_2
+                object_2 = "금융용어"   
+                
+                tokens = del_sw(text_pre.replace(token_2, ""))
+                for j in securities:
+                    if j in tokens:
+                        token_3 = j
+                        token_3_mean = token_3
+                        object_3 = "금융용어"  
+                        tokens = del_sw(text_pre.replace(token_3, ""))
+                        break
+                break
+                
+        word_num = 0
+        if token_1 != "":
             new_df = new_df.append({'확인용': num,
                                     '적요': text,
                                     '적요일련번호': text_num,
@@ -5228,7 +5237,29 @@ def case_47(path):
                                     '출처번호': sour_num,
                                     '적요구조': text_stru,
                                     '적요구조일련번호': text_stru_num,
-                                    '적요 설명': "보조금으로 입금된 내역의 적요이다." if tran_diff == "입금" else "보조금으로 이체한 내역의 적요이다.",
+                                    '적요 설명': "주식으로 입금된 내역의 적요이다." if tran_diff == "입금" else "주식으로 이체한 내역의 적요이다.",
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_1,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+        if token_2 != "":
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "주식으로 입금된 내역의 적요이다." if tran_diff == "입금" else "주식으로 이체한 내역의 적요이다.",
                                     '거래코드': tran_code,
                                     '분류': clas,
                                     '분류번호': clas_num,
@@ -5241,7 +5272,54 @@ def case_47(path):
                                     '완료여부':1,
                                     }, ignore_index=True)
             word_num += 1
-
+        if token_3 != "":
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "주식으로 입금된 내역의 적요이다." if tran_diff == "입금" else "주식으로 이체한 내역의 적요이다.",
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_3,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_3_mean,
+                                    '개체명': object_3,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+        if (token_1 != "") & (token_2 != "") & (token_3 != ""):
+            for i in tokens.split():
+                token_1 = i
+                token_1_mean = token_1
+                object_1 = "알수없음"
+                new_df = new_df.append({'확인용': num,
+                                        '적요': text,
+                                        '적요일련번호': text_num,
+                                        '입출금구분': tran_diff,
+                                        '데이터셋출처': data_sour,
+                                        '출처번호': sour_num,
+                                        '적요구조': text_stru,
+                                        '적요구조일련번호': text_stru_num,
+                                        '적요 설명': "주식으로 입금된 내역의 적요이다." if tran_diff == "입금" else "주식으로 이체한 내역의 적요이다.",
+                                        '거래코드': tran_code,
+                                        '분류': clas,
+                                        '분류번호': clas_num,
+                                        '최소금액': min_amou,
+                                        '최대금액': max_amou,
+                                        '단어': token_1,
+                                        '단어일련번호':word_num,
+                                        '단어의미':token_1_mean,
+                                        '개체명': object_1,
+                                        '완료여부':1,
+                                        }, ignore_index=True)
+        
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
     new_path = "../result/dataset/case"
@@ -9275,7 +9353,6 @@ def case_83(path):
     return new_df
 
 
-
 def case_84(path):
     ### input: DataFrame
     ### output: DataFrame
@@ -9298,67 +9375,34 @@ def case_84(path):
         clas_num = df.iloc[i]['분류번호']
         min_amou = df.iloc[i]['최소금액']
         max_amou = df.iloc[i]['최대금액']
+        
+        
+        token_3 = "협회"
+        token_3_mean = "협회"
+        object_3 = "협회"
+        
+        
+        tokens = del_sw(text_pre.replace(token_3, ""))
 
-
-        token_1 = text_pre[:2]
-        token_1_mean = bank_dict.get(token_1, token_1)
-        object_1 = "금융기관"
-        
-        token_2 = text_pre[2:5]
-        token_2_mean = "주식회사"
-        object_2 = "금융용어"
-
-        tokens = del_sw(text_pre[4:])
-
-        
-        
-        new_df = new_df.append({'확인용': num,
-                                '적요': text,
-                                '적요일련번호': text_num,
-                                '입출금구분': tran_diff,
-                                '데이터셋출처': data_sour,
-                                '출처번호': sour_num,
-                                '적요구조': text_stru,
-                                '적요구조일련번호': text_stru_num,
-                                '적요 설명': token_1_mean+" 계좌에서 회사로 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 회사로 이체한 내역의 적요이다.",
-                                '거래코드': tran_code,
-                                '분류': clas,
-                                '분류번호': clas_num,
-                                '최소금액': min_amou,
-                                '최대금액': max_amou,
-                                '단어': token_1,
-                                '단어일련번호':0,
-                                '단어의미':token_1_mean,
-                                '개체명': object_1,
-                                '완료여부':1,
-                                }, ignore_index=True)
-        
-        new_df = new_df.append({'확인용': num,
-                                '적요': text,
-                                '적요일련번호': text_num,
-                                '입출금구분': tran_diff,
-                                '데이터셋출처': data_sour,
-                                '출처번호': sour_num,
-                                '적요구조': text_stru,
-                                '적요구조일련번호': text_stru_num,
-                                '적요 설명': token_1_mean+" 계좌에서 회사로 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 회사로 이체한 내역의 적요이다.",
-                                '거래코드': tran_code,
-                                '분류': clas,
-                                '분류번호': clas_num,
-                                '최소금액': min_amou,
-                                '최대금액': max_amou,
-                                '단어': token_2,
-                                '단어일련번호':1,
-                                '단어의미':token_2_mean,
-                                '개체명': object_2,
-                                '완료여부':1,
-                                }, ignore_index=True)
-        
-        word_num = 2
+        token_2 = ""
+        token_2_mean = ""
+        for i in ["평화", "문화", "보호", "복지", "장애인", \
+                "교육", "미용", "외식업", "산업", "척수", \
+                "주선", "개별화물", "봉사", "숙박"]:
+            if tokens.endswith(i):
+                token_2 = i
+                token_2_mean = token_2
+                object_2 = "협회명"
+                tokens = del_sw(tokens.replace(token_2, ""))
+                break
+                
+    
+        word_num = 0
         for i in tokens.split():
-            token_3 = i
-            token_3_mean = token_3
-            object_3 = "회사명"
+            token_1 = i
+            token_1_mean = token_1
+            object_1 = "단체명"
+            
             new_df = new_df.append({'확인용': num,
                                     '적요': text,
                                     '적요일련번호': text_num,
@@ -9367,26 +9411,69 @@ def case_84(path):
                                     '출처번호': sour_num,
                                     '적요구조': text_stru,
                                     '적요구조일련번호': text_stru_num,
-                                    '적요 설명': token_1_mean+" 계좌에서 회사로 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 회사로 이체한 내역의 적요이다.",
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
                                     '거래코드': tran_code,
                                     '분류': clas,
                                     '분류번호': clas_num,
                                     '최소금액': min_amou,
                                     '최대금액': max_amou,
-                                    '단어': token_3,
+                                    '단어': token_1,
                                     '단어일련번호':word_num,
-                                    '단어의미':token_3_mean,
-                                    '개체명': object_3,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
                                     '완료여부':1,
                                     }, ignore_index=True)
             word_num += 1
+        if token_2 != "":
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_2,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_2_mean,
+                                    '개체명': object_2,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+
+        new_df = new_df.append({'확인용': num,
+                                '적요': text,
+                                '적요일련번호': text_num,
+                                '입출금구분': tran_diff,
+                                '데이터셋출처': data_sour,
+                                '출처번호': sour_num,
+                                '적요구조': text_stru,
+                                '적요구조일련번호': text_stru_num,
+                                '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                '거래코드': tran_code,
+                                '분류': clas,
+                                '분류번호': clas_num,
+                                '최소금액': min_amou,
+                                '최대금액': max_amou,
+                                '단어': token_3,
+                                '단어일련번호':word_num,
+                                '단어의미':token_3_mean,
+                                '개체명': object_3,
+                                '완료여부':1,
+                                }, ignore_index=True)
         
+
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
     new_path = "../result/dataset/case"
     result_path = os.path.join(new_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
-
 
 
 
@@ -10893,31 +10980,17 @@ def case_99(path):
         max_amou = df.iloc[i]['최대금액']
         
         
-        token_3 = "협회"
-        token_3_mean = "협회"
-        object_3 = "협회"
+        token_2 = "1회"
+        token_2_mean = token_2
+        object_2 = "입금/지급횟수"
         
-        
-        tokens = del_sw(text_pre.replace(token_3, ""))
+        tokens = del_sw(text_pre.replace("0회", ""))
 
-        token_2 = ""
-        token_2_mean = ""
-        for i in ["평화", "문화", "보호", "복지", "장애인", \
-                "교육", "미용", "외식업", "산업", "척수", \
-                "주선", "개별화물", "봉사", "숙박"]:
-            if tokens.endswith(i):
-                token_2 = i
-                token_2_mean = token_2
-                object_2 = "협회명"
-                tokens = del_sw(tokens.replace(token_2, ""))
-                break
-                
-    
         word_num = 0
         for i in tokens.split():
             token_1 = i
             token_1_mean = token_1
-            object_1 = "단체명"
+            object_1 = "알수없음"
             
             new_df = new_df.append({'확인용': num,
                                     '적요': text,
@@ -10927,7 +11000,7 @@ def case_99(path):
                                     '출처번호': sour_num,
                                     '적요구조': text_stru,
                                     '적요구조일련번호': text_stru_num,
-                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                    '적요 설명': "%s 입금된 내역의 적요이다."%(token_2_mean) if tran_diff == "입금" else "%s 이체한 내역의 적요이다."%(token_2_mean),
                                     '거래코드': tran_code,
                                     '분류': clas,
                                     '분류번호': clas_num,
@@ -10940,28 +11013,6 @@ def case_99(path):
                                     '완료여부':1,
                                     }, ignore_index=True)
             word_num += 1
-        if token_2 != "":
-            new_df = new_df.append({'확인용': num,
-                                    '적요': text,
-                                    '적요일련번호': text_num,
-                                    '입출금구분': tran_diff,
-                                    '데이터셋출처': data_sour,
-                                    '출처번호': sour_num,
-                                    '적요구조': text_stru,
-                                    '적요구조일련번호': text_stru_num,
-                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
-                                    '거래코드': tran_code,
-                                    '분류': clas,
-                                    '분류번호': clas_num,
-                                    '최소금액': min_amou,
-                                    '최대금액': max_amou,
-                                    '단어': token_2,
-                                    '단어일련번호':word_num,
-                                    '단어의미':token_2_mean,
-                                    '개체명': object_2,
-                                    '완료여부':1,
-                                    }, ignore_index=True)
-            word_num += 1
 
         new_df = new_df.append({'확인용': num,
                                 '적요': text,
@@ -10971,16 +11022,16 @@ def case_99(path):
                                 '출처번호': sour_num,
                                 '적요구조': text_stru,
                                 '적요구조일련번호': text_stru_num,
-                                '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                '적요 설명': "%s 입금된 내역의 적요이다."%(token_2_mean) if tran_diff == "입금" else "%s 이체한 내역의 적요이다."%(token_2_mean),
                                 '거래코드': tran_code,
                                 '분류': clas,
                                 '분류번호': clas_num,
                                 '최소금액': min_amou,
                                 '최대금액': max_amou,
-                                '단어': token_3,
+                                '단어': token_2,
                                 '단어일련번호':word_num,
-                                '단어의미':token_3_mean,
-                                '개체명': object_3,
+                                '단어의미':token_2_mean,
+                                '개체명': object_2,
                                 '완료여부':1,
                                 }, ignore_index=True)
         
@@ -11112,92 +11163,102 @@ def case_100(path):
 
 
 
-# def case_101(path):
-#     ### input: DataFrame
-#     ### output: DataFrame
-#     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
-#     df.reset_index(drop=True, inplace=True)
-#     new_df = pd.DataFrame()
-#     for i in tqdm(range(len(df))):
-#         text_pre = df.iloc[i]["적요_pre"]
-#         num = df.iloc[i]['확인용']
-#         text = df.iloc[i]['적요']
-#         text_num = df.iloc[i]['적요일련번호']
-#         tran_diff = df.iloc[i]['입출금구분']
-#         data_sour = df.iloc[i]['데이터셋출처']
-#         sour_num = df.iloc[i]['출처번호']
-#         text_stru = df.iloc[i]['적요구조']
-#         text_stru_num = df.iloc[i]['적요구조일련번호']
-#         # text_mean = df.iloc[i]['적요 설명']
-#         tran_code = df.iloc[i]['거래코드']
-#         clas = df.iloc[i]['분류']
-#         clas_num = df.iloc[i]['분류번호']
-#         min_amou = df.iloc[i]['최소금액']
-#         max_amou = df.iloc[i]['최대금액']
+def case_101(path):
+    ### input: DataFrame
+    ### output: DataFrame
+    df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
+    df.reset_index(drop=True, inplace=True)
+    new_df = pd.DataFrame()
+    for i in tqdm(range(len(df))):
+        text_pre = df.iloc[i]["적요_pre"]
+        num = df.iloc[i]['확인용']
+        text = df.iloc[i]['적요']
+        text_num = df.iloc[i]['적요일련번호']
+        tran_diff = df.iloc[i]['입출금구분']
+        data_sour = df.iloc[i]['데이터셋출처']
+        sour_num = df.iloc[i]['출처번호']
+        text_stru = df.iloc[i]['적요구조']
+        text_stru_num = df.iloc[i]['적요구조일련번호']
+        # text_mean = df.iloc[i]['적요 설명']
+        tran_code = df.iloc[i]['거래코드']
+        clas = df.iloc[i]['분류']
+        clas_num = df.iloc[i]['분류번호']
+        min_amou = df.iloc[i]['최소금액']
+        max_amou = df.iloc[i]['최대금액']
         
-#         for i in fare_word_for_contains.split("|"):
-#             if text_pre.endswith(i):
-#                 token_2 = i
-#                 token_2_mean = token_2
-#                 object_2 = "금융용어"
-#                 tokens = del_sw(text_pre.replace(token_2, ""))
-#                 break
+        for i in inco_comp_dict.keys():
+            if i in text_pre:
+                token_2 = i
+                token_2_mean = inco_comp_dict.get(token_2, token_2)
+                object_2 = "법인명"
+                tokens = del_sw(text_pre.replace(token_2, ""))
+                break
+            
+        text_mean = list()
+        if any(word in tran_code for word in ["급여", "대량"]):
+            # 0: 입금 # 1: 출금
+            text_mean.append("회사에서 급여가 입금된 내역의 적요이다.")
+            text_mean.append("급여 이체한 내역의 적요이다.")
+        else:
+            # 0: 입금 # 1: 출금
+            text_mean.append("회사에서 입금된 내역의 적요이다.")
+            text_mean.append("회사에 이체한 내역의 적요이다.")
+            
+        word_num = 0
+        for i in tokens.split():
+            token_1 = i
+            token_1_mean = bank_dict.get(token_1, token_1)
+            object_1 = "회사명"
 
-#         word_num = 0
-#         for i in tokens.split():
-#             token_1 = i
-#             token_1_mean = token_1
-#             object_1 = "사유"
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': text_mean[0] if tran_diff == "입금" else text_mean[1],
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_1,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
 
-#             new_df = new_df.append({'확인용': num,
-#                                     '적요': text,
-#                                     '적요일련번호': text_num,
-#                                     '입출금구분': tran_diff,
-#                                     '데이터셋출처': data_sour,
-#                                     '출처번호': sour_num,
-#                                     '적요구조': text_stru,
-#                                     '적요구조일련번호': text_stru_num,
-#                                     '적요 설명': "%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean) if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean),
-#                                     '거래코드': tran_code,
-#                                     '분류': clas,
-#                                     '분류번호': clas_num,
-#                                     '최소금액': min_amou,
-#                                     '최대금액': max_amou,
-#                                     '단어': token_1,
-#                                     '단어일련번호':word_num,
-#                                     '단어의미':token_1_mean,
-#                                     '개체명': object_1,
-#                                     '완료여부':1,
-#                                     }, ignore_index=True)
-#             word_num += 1
-
-#         new_df = new_df.append({'확인용': num,
-#                                 '적요': text,
-#                                 '적요일련번호': text_num,
-#                                 '입출금구분': tran_diff,
-#                                 '데이터셋출처': data_sour,
-#                                 '출처번호': sour_num,
-#                                 '적요구조': text_stru,
-#                                 '적요구조일련번호': text_stru_num,
-#                                 '적요 설명': "%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean) if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean),
-#                                 '거래코드': tran_code,
-#                                 '분류': clas,
-#                                 '분류번호': clas_num,
-#                                 '최소금액': min_amou,
-#                                 '최대금액': max_amou,
-#                                 '단어': token_2,
-#                                 '단어일련번호':word_num,
-#                                 '단어의미':token_2_mean,
-#                                 '개체명': object_2,
-#                                 '완료여부':1,
-#                                 }, ignore_index=True)
+        new_df = new_df.append({'확인용': num,
+                                '적요': text,
+                                '적요일련번호': text_num,
+                                '입출금구분': tran_diff,
+                                '데이터셋출처': data_sour,
+                                '출처번호': sour_num,
+                                '적요구조': text_stru,
+                                '적요구조일련번호': text_stru_num,
+                                '적요 설명': text_mean[0] if tran_diff == "입금" else text_mean[1],
+                                '거래코드': tran_code,
+                                '분류': clas,
+                                '분류번호': clas_num,
+                                '최소금액': min_amou,
+                                '최대금액': max_amou,
+                                '단어': token_2,
+                                '단어일련번호':word_num,
+                                '단어의미':token_2_mean,
+                                '개체명': object_2,
+                                '완료여부':1,
+                                }, ignore_index=True)
         
 
-#     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-#     new_path = "../result/dataset/case"
-#     result_path = os.path.join(new_path, result_file_name)
-#     new_df.to_csv(result_path, encoding="utf-8-sig")
-#     return new_df
+    result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
+    new_path = "../result/dataset/case"
+    result_path = os.path.join(new_path, result_file_name)
+    new_df.to_csv(result_path, encoding="utf-8-sig")
+    return new_df
 
 
 
@@ -11287,127 +11348,455 @@ def case_102(path):
     return new_df
 
 
+
+
+def case_103(path):
+    ### input: DataFrame
+    ### output: DataFrame
+    df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
+    df.reset_index(drop=True, inplace=True)
+    new_df = pd.DataFrame()
+    for i in tqdm(range(len(df))):
+        text_pre = df.iloc[i]["적요_pre"]
+        num = df.iloc[i]['확인용']
+        text = df.iloc[i]['적요']
+        text_num = df.iloc[i]['적요일련번호']
+        tran_diff = df.iloc[i]['입출금구분']
+        data_sour = df.iloc[i]['데이터셋출처']
+        sour_num = df.iloc[i]['출처번호']
+        text_stru = df.iloc[i]['적요구조']
+        text_stru_num = df.iloc[i]['적요구조일련번호']
+        # text_mean = df.iloc[i]['적요 설명']
+        tran_code = df.iloc[i]['거래코드']
+        clas = df.iloc[i]['분류']
+        clas_num = df.iloc[i]['분류번호']
+        min_amou = df.iloc[i]['최소금액']
+        max_amou = df.iloc[i]['최대금액']
+        
+
+        for i in grou_word_for_contains.split("|"):
+            if text_pre.endswith(i):
+                token_2 = i
+                token_2_mean = token_2
+                object_2 = "모임종류"
+                tokens = del_sw(text_pre.replace(token_2, ""))
+
+        word_num = 0
+        for i in tokens.split():
+            token_1 = i
+            token_1_mean = token_1
+            object_1 = "모임이름"
+
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s 에서(에) 입금된 내역의 적요이다."%(token_2_mean) if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean),
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_1,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+
+        new_df = new_df.append({'확인용': num,
+                                '적요': text,
+                                '적요일련번호': text_num,
+                                '입출금구분': tran_diff,
+                                '데이터셋출처': data_sour,
+                                '출처번호': sour_num,
+                                '적요구조': text_stru,
+                                '적요구조일련번호': text_stru_num,
+                                '적요 설명': "%s 에서(에) 입금된 내역의 적요이다."%(token_2_mean) if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean),
+                                '거래코드': tran_code,
+                                '분류': clas,
+                                '분류번호': clas_num,
+                                '최소금액': min_amou,
+                                '최대금액': max_amou,
+                                '단어': token_2,
+                                '단어일련번호':word_num,
+                                '단어의미':token_2_mean,
+                                '개체명': object_2,
+                                '완료여부':1,
+                                }, ignore_index=True)
+        
+
+    result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
+    new_path = "../result/dataset/case"
+    result_path = os.path.join(new_path, result_file_name)
+    new_df.to_csv(result_path, encoding="utf-8-sig")
+    return new_df
+
+
+
+def case_104(path):
+    ### input: DataFrame
+    ### output: DataFrame
+    df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
+    df.reset_index(drop=True, inplace=True)
+    new_df = pd.DataFrame()
+    for i in tqdm(range(len(df))):
+        text_pre = df.iloc[i]["적요_pre"]
+        num = df.iloc[i]['확인용']
+        text = df.iloc[i]['적요']
+        text_num = df.iloc[i]['적요일련번호']
+        tran_diff = df.iloc[i]['입출금구분']
+        data_sour = df.iloc[i]['데이터셋출처']
+        sour_num = df.iloc[i]['출처번호']
+        text_stru = df.iloc[i]['적요구조']
+        text_stru_num = df.iloc[i]['적요구조일련번호']
+        # text_mean = df.iloc[i]['적요 설명']
+        tran_code = df.iloc[i]['거래코드']
+        clas = df.iloc[i]['분류']
+        clas_num = df.iloc[i]['분류번호']
+        min_amou = df.iloc[i]['최소금액']
+        max_amou = df.iloc[i]['최대금액']
+        
+        token_3 = "상환"
+        token_3_mean = token_3
+        object_3 = "금융용어"
+        
+        tokens = del_sw(text_pre.replace(token_3, ""))
+
+        token_2 = ""
+        token_2_mean = token_2
+        for i in ["중복", "원금", "차용", "대여금", "부채", "금전대차", "차입금", "주담대", "대출금", "원리금", "대출"]:
+            if tokens.endswith(i):
+                token_2 = i
+                token_2_mean = token_2
+                object_2 = "상환종류"
+                tokens = del_sw(tokens.replace(token_2, ""))
+                break
+
+
+        word_num = 0
+        for i in tokens.split():
+            token_1 = i
+            token_1_mean = bank_dict.get(token_1, token_1)
+            object_1 = "은행명/상환사유"
+
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_1,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+        if token_2 != "":
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_2,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_2_mean,
+                                    '개체명': object_2,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+        
+        new_df = new_df.append({'확인용': num,
+                                '적요': text,
+                                '적요일련번호': text_num,
+                                '입출금구분': tran_diff,
+                                '데이터셋출처': data_sour,
+                                '출처번호': sour_num,
+                                '적요구조': text_stru,
+                                '적요구조일련번호': text_stru_num,
+                                '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                '거래코드': tran_code,
+                                '분류': clas,
+                                '분류번호': clas_num,
+                                '최소금액': min_amou,
+                                '최대금액': max_amou,
+                                '단어': token_3,
+                                '단어일련번호':word_num,
+                                '단어의미':token_3_mean,
+                                '개체명': object_3,
+                                '완료여부':1,
+                                }, ignore_index=True)
+
+    result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
+    new_path = "../result/dataset/case"
+    result_path = os.path.join(new_path, result_file_name)
+    new_df.to_csv(result_path, encoding="utf-8-sig")
+    return new_df
+
+
+def case_105(path):
+    ### input: DataFrame
+    ### output: DataFrame
+    df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
+    df.reset_index(drop=True, inplace=True)
+    new_df = pd.DataFrame()
+    for i in tqdm(range(len(df))):
+        text_pre = df.iloc[i]["적요_pre"]
+        num = df.iloc[i]['확인용']
+        text = df.iloc[i]['적요']
+        text_num = df.iloc[i]['적요일련번호']
+        tran_diff = df.iloc[i]['입출금구분']
+        data_sour = df.iloc[i]['데이터셋출처']
+        sour_num = df.iloc[i]['출처번호']
+        text_stru = df.iloc[i]['적요구조']
+        text_stru_num = df.iloc[i]['적요구조일련번호']
+        # text_mean = df.iloc[i]['적요 설명']
+        tran_code = df.iloc[i]['거래코드']
+        clas = df.iloc[i]['분류']
+        clas_num = df.iloc[i]['분류번호']
+        min_amou = df.iloc[i]['최소금액']
+        max_amou = df.iloc[i]['최대금액']
+        
+        token_3 = "이체"
+        token_3_mean = token_3
+        object_3 = "금융용어"
+        
+        tokens = del_sw(text_pre.replace(token_3, ""))
+
+        token_2 = ""
+        token_2_mean = token_2
+        for i in ["상여", "자동", "정기", "대량", "일반", "입금", "적금", "대출이자", "CMA"]:
+            if tokens.endswith(i):
+                token_2 = i
+                token_2_mean = token_2
+                object_2 = "이체종류"
+                tokens = del_sw(tokens.replace(token_2, ""))
+                break
+
+
+        word_num = 0
+        for i in tokens.split():
+            token_1 = i
+            token_1_mean = bank_dict.get(token_1, token_1)
+            object_1 = "은행명/상환사유"
+
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_1,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+        if token_2 != "":
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_2,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_2_mean,
+                                    '개체명': object_2,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+        
+        new_df = new_df.append({'확인용': num,
+                                '적요': text,
+                                '적요일련번호': text_num,
+                                '입출금구분': tran_diff,
+                                '데이터셋출처': data_sour,
+                                '출처번호': sour_num,
+                                '적요구조': text_stru,
+                                '적요구조일련번호': text_stru_num,
+                                '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                '거래코드': tran_code,
+                                '분류': clas,
+                                '분류번호': clas_num,
+                                '최소금액': min_amou,
+                                '최대금액': max_amou,
+                                '단어': token_3,
+                                '단어일련번호':word_num,
+                                '단어의미':token_3_mean,
+                                '개체명': object_3,
+                                '완료여부':1,
+                                }, ignore_index=True)
+
+    result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
+    new_path = "../result/dataset/case"
+    result_path = os.path.join(new_path, result_file_name)
+    new_df.to_csv(result_path, encoding="utf-8-sig")
+    return new_df
+
 if __name__ == "__main__":
     # split_data("./data/alldata.csv")
-    # case_1("../data/dataset/case/case_1.csv")
-    # case_1_1("../data/dataset/case/case_1_1.csv")
-    # case_2("../data/dataset/case/case_2.csv")
-    # case_3("../data/dataset/case/case_3.csv")
-    # case_4("../data/dataset/case/case_4.csv")
-    # case_5("../data/dataset/case/case_5.csv")
+    case_1("../data/dataset/case/case_1.csv")
+    case_1_1("../data/dataset/case/case_1_1.csv")
+    case_2("../data/dataset/case/case_2.csv")
+    case_3("../data/dataset/case/case_3.csv")
+    case_4("../data/dataset/case/case_4.csv")
+    case_5("../data/dataset/case/case_5.csv")
     case_6("../data/dataset/case/case_6.csv")
-    # case_6_1("../data/dataset/case/case_6_1.csv")
-    # case_7("../data/dataset/case/case_7.csv")
-    # case_8("../data/dataset/case/case_8.csv")
-    # case_9("../data/dataset/case/case_9.csv")
-    # case_10("../data/dataset/case/case_10.csv")
-    # case_10_1("../data/dataset/case/case_10_1.csv")
-    # case_10_2("../data/dataset/case/case_10_2.csv")
-    # case_11("../data/dataset/case/case_11.csv")
-    # case_12("../data/dataset/case/case_12.csv")
-    # case_13("../data/dataset/case/case_13.csv")
-    # case_14("../data/dataset/case/case_14.csv")
-    # case_15("../data/dataset/case/case_15.csv")
-    # case_16("../data/dataset/case/case_16.csv")
-    # case_17("../data/dataset/case/case_17.csv")
-    # case_18("../data/dataset/case/case_18.csv")
-    # case_19("../data/dataset/case/case_19.csv")
-    # case_20("../data/dataset/case/case_20.csv")
-    # case_21("../data/dataset/case/case_21.csv")
-    # case_21_1("../data/dataset/case/case_21_1.csv")
-    # case_22("../data/dataset/case/case_22.csv")
-    # case_23("../data/dataset/case/case_23.csv")
-    # case_24("../data/dataset/case/case_24.csv")
-    # case_25("../data/dataset/case/case_25.csv")
-    # case_26("../data/dataset/case/case_26.csv")
-    # case_27("../data/dataset/case/case_27.csv")
-    # case_27_1("../data/dataset/case/case_27_1.csv")
-    # case_28("../data/dataset/case/case_28.csv")
-    # case_29("../data/dataset/case/case_29.csv")
-    # case_30("../data/dataset/case/case_30.csv")
-    # case_31("../data/dataset/case/case_31.csv")
-    # case_32("../data/dataset/case/case_32.csv")
-    # case_33("../data/dataset/case/case_33.csv")
-    # case_34("../data/dataset/case/case_34.csv")
-    # case_35("../data/dataset/case/case_35.csv")
-    # case_36("../data/dataset/case/case_36.csv")
-    # case_37("../data/dataset/case/case_37.csv")
-    # case_38("../data/dataset/case/case_38.csv")
-    # case_39("../data/dataset/case/case_39.csv")
-    # case_39_1("../data/dataset/case/case_39_1.csv")
-    # case_40("../data/dataset/case/case_40.csv")
-    # case_41("../data/dataset/case/case_41.csv")
-    # case_41_1("../data/dataset/case/case_41_1.csv")
-    # case_42("../data/dataset/case/case_42.csv")
-    # case_43("../data/dataset/case/case_43.csv")
-    # case_43_1("../data/dataset/case/case_43_1.csv")
-    # case_44("../data/dataset/case/case_44.csv")
-    # case_45("../data/dataset/case/case_45.csv")
-    # case_46("../data/dataset/case/case_46.csv")
-    # case_47("../data/dataset/case/case_47.csv")
-    # case_48("../data/dataset/case/case_48.csv")
-    # case_49("../data/dataset/case/case_49.csv")
-    # case_50("../data/dataset/case/case_50.csv")
-    # case_51("../data/dataset/case/case_51.csv")
-    # case_52("../data/dataset/case/case_52.csv")
-    # case_53("../data/dataset/case/case_53.csv")
-    # case_54("../data/dataset/case/case_54.csv")
-    # case_55("../data/dataset/case/case_55.csv")
-    # case_55_1("../data/dataset/case/case_55_1.csv")
-    # case_56("../data/dataset/case/case_56.csv")
-    # case_57("../data/dataset/case/case_57.csv")
-    # case_58("../data/dataset/case/case_58.csv")
-    # case_59("../data/dataset/case/case_59.csv")
-    # case_60("../data/dataset/case/case_60.csv")
-    # case_61("../data/dataset/case/case_61.csv")
-    # case_62("../data/dataset/case/case_62.csv")
-    # case_63("../data/dataset/case/case_63.csv")
-    # case_64("../data/dataset/case/case_64.csv")
-    # case_65("../data/dataset/case/case_65.csv")
-    # case_66("../data/dataset/case/case_66.csv")
-    # case_67("../data/dataset/case/case_67.csv")
-    # case_67_1("../data/dataset/case/case_67_1.csv")
-    # case_68("../data/dataset/case/case_68.csv")
-    # case_69("../data/dataset/case/case_69.csv")
-    # case_69_1("../data/dataset/case/case_69_1.csv")
-    # case_69_2("../data/dataset/case/case_69_2.csv")
-    # case_70("../data/dataset/case/case_70.csv")
+    case_7("../data/dataset/case/case_7.csv")
+    case_8("../data/dataset/case/case_8.csv")
+    case_9("../data/dataset/case/case_9.csv")
+    case_10("../data/dataset/case/case_10.csv")
+    case_10_1("../data/dataset/case/case_10_1.csv")
+    case_10_2("../data/dataset/case/case_10_2.csv")
+    case_11("../data/dataset/case/case_11.csv")
+    case_12("../data/dataset/case/case_12.csv")
+    case_13("../data/dataset/case/case_13.csv")
+    case_14("../data/dataset/case/case_14.csv")
+    case_15("../data/dataset/case/case_15.csv")
+    case_16("../data/dataset/case/case_16.csv")
+    case_17("../data/dataset/case/case_17.csv")
+    case_18("../data/dataset/case/case_18.csv")
+    case_19("../data/dataset/case/case_19.csv")
+    case_20("../data/dataset/case/case_20.csv")
+    case_21("../data/dataset/case/case_21.csv")
+    case_21_1("../data/dataset/case/case_21_1.csv")
+    case_22("../data/dataset/case/case_22.csv")
+    case_23("../data/dataset/case/case_23.csv")
+    case_24("../data/dataset/case/case_24.csv")
+    case_25("../data/dataset/case/case_25.csv")
+    case_26("../data/dataset/case/case_26.csv")
+    case_27("../data/dataset/case/case_27.csv")
+    case_27_1("../data/dataset/case/case_27_1.csv")
+    case_28("../data/dataset/case/case_28.csv")
+    case_29("../data/dataset/case/case_29.csv")
+    case_30("../data/dataset/case/case_30.csv")
+    case_31("../data/dataset/case/case_31.csv")
+    case_32("../data/dataset/case/case_32.csv")
+    case_33("../data/dataset/case/case_33.csv")
+    case_34("../data/dataset/case/case_34.csv")
+    case_35("../data/dataset/case/case_35.csv")
+    case_36("../data/dataset/case/case_36.csv")
+    case_37("../data/dataset/case/case_37.csv")
+    case_38("../data/dataset/case/case_38.csv")
+    case_39("../data/dataset/case/case_39.csv")
+    case_39_1("../data/dataset/case/case_39_1.csv")
+    case_40("../data/dataset/case/case_40.csv")
+    case_41("../data/dataset/case/case_41.csv")
+    case_41_1("../data/dataset/case/case_41_1.csv")
+    case_42("../data/dataset/case/case_42.csv")
+    case_43("../data/dataset/case/case_43.csv")
+    case_43_1("../data/dataset/case/case_43_1.csv")
+    case_44("../data/dataset/case/case_44.csv")
+    case_45("../data/dataset/case/case_45.csv")
+    case_46("../data/dataset/case/case_46.csv")
+    case_47("../data/dataset/case/case_47.csv")
+    case_48("../data/dataset/case/case_48.csv")
+    case_49("../data/dataset/case/case_49.csv")
+    case_50("../data/dataset/case/case_50.csv")
+    case_51("../data/dataset/case/case_51.csv")
+    case_52("../data/dataset/case/case_52.csv")
+    case_53("../data/dataset/case/case_53.csv")
+    case_54("../data/dataset/case/case_54.csv")
+    case_55("../data/dataset/case/case_55.csv")
+    case_55_1("../data/dataset/case/case_55_1.csv")
+    case_56("../data/dataset/case/case_56.csv")
+    case_57("../data/dataset/case/case_57.csv")
+    case_58("../data/dataset/case/case_58.csv")
+    case_59("../data/dataset/case/case_59.csv")
+    case_60("../data/dataset/case/case_60.csv")
+    case_61("../data/dataset/case/case_61.csv")
+    case_62("../data/dataset/case/case_62.csv")
+    case_63("../data/dataset/case/case_63.csv")
+    case_64("../data/dataset/case/case_64.csv")
+    case_65("../data/dataset/case/case_65.csv")
+    case_66("../data/dataset/case/case_66.csv")
+    case_67("../data/dataset/case/case_67.csv")
+    case_67_1("../data/dataset/case/case_67_1.csv")
+    case_68("../data/dataset/case/case_68.csv")
+    case_69("../data/dataset/case/case_69.csv")
+    case_69_1("../data/dataset/case/case_69_1.csv")
+    case_69_2("../data/dataset/case/case_69_2.csv")
+    case_70("../data/dataset/case/case_70.csv")
     case_71("../data/dataset/case/case_71.csv")
     case_72("../data/dataset/case/case_72.csv")
-    # case_73("../data/dataset/case/case_73.csv")
-    # case_74("../data/dataset/case/case_74.csv")
-    # case_75("../data/dataset/case/case_75.csv")
-    # case_76("../data/dataset/case/case_76.csv")
-    # case_77("../data/dataset/case/case_77.csv")
-    # case_78("../data/dataset/case/case_78.csv")
-    # case_79("../data/dataset/case/case_79.csv")
-    # case_80("../data/dataset/case/case_80.csv")
-    # case_80_1("../data/dataset/case/case_80_1.csv")
-    # case_80_2("../data/dataset/case/case_80_2.csv")
-    # case_80_3("../data/dataset/case/case_80_3.csv")
-    # case_81("../data/dataset/case/case_81.csv")
-    # case_81_1("../data/dataset/case/case_81_1.csv")
-    # case_82("../data/dataset/case/case_82.csv")
-    # case_83("../data/dataset/case/case_83.csv")
-    # case_84("../data/dataset/case/case_84.csv")
-    # case_85("../data/dataset/case/case_85.csv")
-    # case_86("../data/dataset/case/case_86.csv")
-    # case_87("../data/dataset/case/case_87.csv")
-    # case_88("../data/dataset/case/case_88.csv")
-    # case_89("../data/dataset/case/case_89.csv")
-    # case_89_1("../data/dataset/case/case_89_1.csv")
-    # case_89_2("../data/dataset/case/case_89_2.csv")
-    # case_90("../data/dataset/case/case_90.csv")
-    # case_91("../data/dataset/case/case_91.csv")
-    # case_92("../data/dataset/case/case_92.csv")
-    # case_93("../data/dataset/case/case_93.csv")
-    # case_94("../data/dataset/case/case_94.csv")
-    # case_94_1("../data/dataset/case/case_94_1.csv")
-    # case_95("../data/dataset/case/case_95.csv")
-    # case_96("../data/dataset/case/case_96.csv")
-    # case_97("../data/dataset/case/case_97.csv")
-    # case_98("../data/dataset/case/case_98.csv")
-    # case_99("../data/dataset/case/case_99.csv")
-    # case_100("../data/dataset/case/case_100.csv")
-    # case_101("../data/dataset/case/case_101.csv")
-    # case_102("../data/dataset/case/case_102.csv")
+    case_73("../data/dataset/case/case_73.csv")
+    case_74("../data/dataset/case/case_74.csv")
+    case_75("../data/dataset/case/case_75.csv")
+    case_76("../data/dataset/case/case_76.csv")
+    case_77("../data/dataset/case/case_77.csv")
+    case_78("../data/dataset/case/case_78.csv")
+    case_79("../data/dataset/case/case_79.csv")
+    case_80("../data/dataset/case/case_80.csv")
+    case_80_1("../data/dataset/case/case_80_1.csv")
+    case_80_2("../data/dataset/case/case_80_2.csv")
+    case_80_3("../data/dataset/case/case_80_3.csv")
+    case_81("../data/dataset/case/case_81.csv")
+    case_81_1("../data/dataset/case/case_81_1.csv")
+    case_82("../data/dataset/case/case_82.csv")
+    case_83("../data/dataset/case/case_83.csv")
+    case_84("../data/dataset/case/case_84.csv")
+    case_85("../data/dataset/case/case_85.csv")
+    case_86("../data/dataset/case/case_86.csv")
+    case_87("../data/dataset/case/case_87.csv")
+    case_88("../data/dataset/case/case_88.csv")
+    case_89("../data/dataset/case/case_89.csv")
+    case_89_1("../data/dataset/case/case_89_1.csv")
+    case_89_2("../data/dataset/case/case_89_2.csv")
+    case_90("../data/dataset/case/case_90.csv")
+    case_91("../data/dataset/case/case_91.csv")
+    case_92("../data/dataset/case/case_92.csv")
+    case_93("../data/dataset/case/case_93.csv")
+    case_94("../data/dataset/case/case_94.csv")
+    case_94_1("../data/dataset/case/case_94_1.csv")
+    case_95("../data/dataset/case/case_95.csv")
+    case_96("../data/dataset/case/case_96.csv")
+    case_97("../data/dataset/case/case_97.csv")
+    case_98("../data/dataset/case/case_98.csv")
+    case_99("../data/dataset/case/case_99.csv")
+    case_100("../data/dataset/case/case_100.csv")
+    case_101("../data/dataset/case/case_101.csv")
+    case_102("../data/dataset/case/case_102.csv")
+    case_103("../data/dataset/case/case_103.csv")
+    case_104("../data/dataset/case/case_104.csv")
+    case_105("../data/dataset/case/case_105.csv")

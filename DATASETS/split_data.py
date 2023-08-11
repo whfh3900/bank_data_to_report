@@ -467,7 +467,7 @@ def split_data(path):
 
 
     # 인센티브로 끝나는 케이스
-    case_43_index = df[((df["적요_pre"].str.endswith("인센티브")))].index.tolist()
+    case_43_index = df[((df["적요_pre"].str.endswith(("인센티브", "인센티", "인센"))))].index.tolist()
     case_43 = df[df.index.isin(case_43_index)].copy()
     case_43.to_csv("../data/dataset/case/case_43.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_43_index)]
@@ -895,13 +895,11 @@ def split_data(path):
 
 
 
-    # # 금융사명 뒤에 ( 로 시작하는 케이스
-    # case_84_index = df[(df["적요_pre"].str.startswith(tuple(bank_dict.keys()))) & 
-    #                 (df["적요_pre"].str[2].isin(("(", "（")))].index.tolist()
-    # case_84 = df[df.index.isin(case_84_index)].copy()
-    # case_84.to_csv("../data/dataset/case/case_84.csv", encoding="utf-8-sig")
-    # df = df[~df.index.isin(case_84_index)]
-
+    # 협회로 끝나는 경우
+    case_84_index = df[(df["적요_pre"].str.endswith("협회"))].index.tolist()
+    case_84 = df[df.index.isin(case_84_index)].copy()
+    case_84.to_csv("../data/dataset/case/case_84.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_84_index)]
 
 
     # 삼성금융으로 시작하는 경우
@@ -1049,8 +1047,8 @@ def split_data_2(path):
     case_98.to_csv("../data/dataset/case/case_98.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_98_index)]
     
-    # 협회로 끝나는 경우
-    case_99_index = df[(df["적요_pre"].str.endswith("협회"))].index.tolist()
+    # 0회로 끝나는 경우
+    case_99_index = df[(df["적요_pre"].str.endswith("0회"))].index.tolist()
     case_99 = df[df.index.isin(case_99_index)].copy()
     case_99.to_csv("../data/dataset/case/case_99.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_99_index)]
@@ -1064,7 +1062,7 @@ def split_data_2(path):
     df = df[~df.index.isin(case_100_index)]    
     
 
-    # 회사나 법인이 들어있고 회사사용 단어가 있는 경우
+    # 회사나 법인이 들어있는 경우
     inco_comp_escaped = [re.escape(key) for key in inco_comp_dict.keys()]
     case_101_index = df[(df["적요_pre"].str.contains("|".join(inco_comp_escaped)))].index.tolist()
     case_101 = df[df.index.isin(case_101_index)].copy()
@@ -1077,21 +1075,41 @@ def split_data_2(path):
     case_102.to_csv("../data/dataset/case/case_102.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_102_index)]
 
-    # # 비로 끝나는 경우
-    # case_103_index = df[(df["적요_pre"].str.endswith("비"))].index.tolist()
-    # case_103 = df[df.index.isin(case_103_index)].copy()
-    # case_103.to_csv("../data/dataset/case/case_103.csv", encoding="utf-8-sig")
-    # df = df[~df.index.isin(case_103_index)]
+    # 00회로 끝나는 경우
+    case_103_index = df[(df["적요_pre"].str.endswith(tuple(grou_word_for_contains.split("|"))))].index.tolist()
+    case_103 = df[df.index.isin(case_103_index)].copy()
+    case_103.to_csv("../data/dataset/case/case_103.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_103_index)]
+    
+    # 상환으로 끝나는 경우
+    case_104_index = df[(df["적요_pre"].str.endswith("상환"))].index.tolist()
+    case_104 = df[df.index.isin(case_104_index)].copy()
+    case_104.to_csv("../data/dataset/case/case_104.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_104_index)]
     
 
-    # 은행명으로 시작하고 두번째가 -인 경우
-    case_999_index = df[(df["적요_pre"].str.startswith(tuple(bank_dict.keys()))) & 
-                    (df["적요_pre"].str[2].isin(("-", "－")))].index.tolist()
-    case_999 = df[df.index.isin(case_999_index)].copy()
-    case_999.to_csv("../data/dataset/case/case_999.csv", encoding="utf-8-sig")
-    df = df[~df.index.isin(case_999_index)]
+    # 이체로 끝나는 경우
+    case_105_index = df[(df["적요_pre"].str.endswith("이체"))].index.tolist()
+    case_105 = df[df.index.isin(case_105_index)].copy()
+    case_105.to_csv("../data/dataset/case/case_105.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_105_index)]
     
-    df.to_csv("../data/dataset/case/etc.csv", encoding="utf-8-sig")
+    
+    # # 회로 끝나는 경우
+    # case_998_index = df[(df["적요_pre"].str.endswith("회"))].index.tolist()
+    # case_998 = df[df.index.isin(case_998_index)].copy()
+    # case_998.to_csv("../data/dataset/case/case_998.csv", encoding="utf-8-sig")
+    # df = df[~df.index.isin(case_998_index)]
+    
+    
+    # # 은행명으로 시작하고 두번째가 -인 경우
+    # case_999_index = df[(df["적요_pre"].str.startswith(tuple(bank_dict.keys()))) & 
+    #                 (df["적요_pre"].str[2].isin(("-", "－")))].index.tolist()
+    # case_999 = df[df.index.isin(case_999_index)].copy()
+    # case_999.to_csv("../data/dataset/case/case_999.csv", encoding="utf-8-sig")
+    # df = df[~df.index.isin(case_999_index)]
+    
+    # df.to_csv("../data/dataset/case/etc.csv", encoding="utf-8-sig")
 
     return df
 
