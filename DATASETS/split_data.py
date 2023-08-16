@@ -984,27 +984,13 @@ def split_data(path):
     df = df[~df.index.isin(case_91_index)]
 
 
-
     # 청약으로 끝나는 경우
     case_92_index = df[(df["적요_pre"].str.endswith("청약"))].index.tolist()
     case_92 = df[df.index.isin(case_92_index)].copy()
     case_92.to_csv("../data/dataset/case/case_92.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_92_index)]
-    
-    # df.to_csv("../data/dataset/case/etc.csv", encoding="utf-8-sig")
-    df.to_csv("../data/dataset/case_v4/etc.csv", encoding="utf-8-sig")
 
-    return df
-    
-    
-def split_data_2(path):
-    df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
 
-    # df["적요_pre"] = df["적요"].progress_apply(lambda x: process_text(x))
-    # df["적요길이"] = df["적요_pre"].progress_apply(lambda x: len([i for i in x if i not in (" ", "　", "-", "－", "_", "＿")]))
-    # df["적요반대_pre"] = df["적요_pre"].progress_apply(lambda x: x[::-1])
-    
-    ################################################## v2
     # 월세 또는 월세액으로 끝나는 경우
     case_93_index = df[(df["적요_pre"].str.endswith(("월세", "월세액")))].index.tolist()
     case_93 = df[df.index.isin(case_93_index)].copy()
@@ -1094,25 +1080,61 @@ def split_data_2(path):
     case_105.to_csv("../data/dataset/case/case_105.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_105_index)]
     
-    
-    # # 회로 끝나는 경우
-    # case_998_index = df[(df["적요_pre"].str.endswith("회"))].index.tolist()
-    # case_998 = df[df.index.isin(case_998_index)].copy()
-    # case_998.to_csv("../data/dataset/case/case_998.csv", encoding="utf-8-sig")
-    # df = df[~df.index.isin(case_998_index)]
-    
-    
-    # # 은행명으로 시작하고 두번째가 -인 경우
-    # case_999_index = df[(df["적요_pre"].str.startswith(tuple(bank_dict.keys()))) & 
-    #                 (df["적요_pre"].str[2].isin(("-", "－")))].index.tolist()
-    # case_999 = df[df.index.isin(case_999_index)].copy()
-    # case_999.to_csv("../data/dataset/case/case_999.csv", encoding="utf-8-sig")
-    # df = df[~df.index.isin(case_999_index)]
-    
+
     # df.to_csv("../data/dataset/case/etc.csv", encoding="utf-8-sig")
+    df.to_csv("../data/dataset/case_v5/etc.csv", encoding="utf-8-sig")
+
+    return df
+    
+    
+def split_data_2(path):
+    df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
+
+    # 정산으로 끝나는 경우
+    case_106_index = df[(df["적요_pre"].str.endswith(("정산")))].index.tolist()
+    case_106 = df[df.index.isin(case_106_index)].copy()
+    case_106.to_csv("../data/dataset/case/case_106.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_106_index)]
+    
+
+    # 초등, 고등으로 끝나는 경우
+    case_107_index = df[(df["적요_pre"].str.endswith(("초등", "고등")))].index.tolist()
+    case_107 = df[df.index.isin(case_107_index)].copy()
+    case_107.to_csv("../data/dataset/case/case_107.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_107_index)]
+    
+
+    # 연합, 조합으로 끝나는 경우
+    case_108_index = df[(df["적요_pre"].str.endswith(("연합", "조합")))].index.tolist()
+    case_108 = df[df.index.isin(case_108_index)].copy()
+    case_108.to_csv("../data/dataset/case/case_108.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_108_index)]
+
+
+    # 정수기로 끝나는 경우
+    case_109_index = df[(df["적요_pre"].str.endswith(("정수기")))].index.tolist()
+    case_109 = df[df.index.isin(case_109_index)].copy()
+    case_109.to_csv("../data/dataset/case/case_109.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_109_index)]
+    
+
+    # 센터로 끝나는 경우
+    case_110_index = df[(df["적요_pre"].str.endswith("센터"))].index.tolist()
+    case_110 = df[df.index.isin(case_110_index)].copy()
+    case_110.to_csv("../data/dataset/case/case_110.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_110_index)]
+    
+
+    # 식대로 끝나는 경우
+    case_111_index = df[(df["적요_pre"].str.endswith("식대"))].index.tolist()
+    case_111 = df[df.index.isin(case_111_index)].copy()
+    case_111.to_csv("../data/dataset/case/case_111.csv", encoding="utf-8-sig")
+    df = df[~df.index.isin(case_111_index)]
+
+    df.to_csv("../data/dataset/case/etc.csv", encoding="utf-8-sig")
 
     return df
 
 if __name__ == "__main__":
-    split_data("../data/dataset/alldata.csv")
-    split_data_2("../data/dataset/case_v4/etc.csv")
+    # split_data("../data/dataset/alldata.csv")
+    split_data_2("../data/dataset/case_v5/etc.csv")
