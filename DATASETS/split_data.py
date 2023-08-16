@@ -139,14 +139,12 @@ def split_data(path):
     df = df[~df.index.isin(case_9_index)]
 
 
-
     # 은행명으로 시작하고 보험관련 단어가 뒤에 들어있는 케이스
-    case_10_index = df[(df["적요_pre"].str.startswith(tuple(bank_dict.keys()))) & 
-                    (df["적요_pre"].str.contains(insu_word_for_contains))].index.tolist()
+    case_10_index = df[(df["적요_pre"].str.contains(insu_word_for_contains))].index.tolist()
     case_10 = df[df.index.isin(case_10_index)].copy()
     case_10.to_csv("../data/dataset/case/case_10.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_10_index)]
-
+    
 
 
     # 은행명으로 시작하고 주거관련 단어가 들어있는 케이스
@@ -1131,10 +1129,18 @@ def split_data_2(path):
     case_111.to_csv("../data/dataset/case/case_111.csv", encoding="utf-8-sig")
     df = df[~df.index.isin(case_111_index)]
 
+
+    # # 식대로 끝나는 경우
+    # case_112_index = df[(df["적요_pre"].str.endswith("보험"))].index.tolist()
+    # case_112 = df[df.index.isin(case_112_index)].copy()
+    # case_112.to_csv("../data/dataset/case/case_112.csv", encoding="utf-8-sig")
+    # df = df[~df.index.isin(case_112_index)]
+    
+    
     df.to_csv("../data/dataset/case/etc.csv", encoding="utf-8-sig")
 
     return df
 
 if __name__ == "__main__":
-    # split_data("../data/dataset/alldata.csv")
+    split_data("../data/dataset/alldata.csv")
     split_data_2("../data/dataset/case_v5/etc.csv")
