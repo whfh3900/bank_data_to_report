@@ -1,8 +1,15 @@
 
 import re
 import unicodedata
-from ats_module.text_preprocessing import *
-nk = Nickonlpy(base=False)
+import os
+# from ats_module.text_preprocessing import *
+# nk = Nickonlpy(base=False)
+
+def make_folder(path):
+    path = os.path.join(os.path.dirname(path), "case")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
 
 def process_text(text):
     # 정규표현식 패턴을 사용하여 괄호 안의 글자를 추출합니다.
@@ -52,12 +59,12 @@ def del_sw(text, delete_num=True):
     return text
 
 
-def find_name(text):
+# def find_name(text):
     
-    # 정규표현식을 사용하여 특수문자를 제거합니다.
-    result = re.sub(r'[^\w\s]', ' ', text)
-    result = [i[0] for i in nk.post.pos(result) if i[1] == 'Name']
-    return result
+#     # 정규표현식을 사용하여 특수문자를 제거합니다.
+#     result = re.sub(r'[^\w\s]', ' ', text)
+#     result = [i[0] for i in nk.post.pos(result) if i[1] == 'Name']
+#     return result
 
 
 def check_language(input_str):
@@ -76,6 +83,9 @@ place = ["제주", "전북", "경남", "한국", "부산", "광주", "대구"]
 
 securities = ["고수익", "채권혼", "채권", "주식", "증권", "증권자", "증권", "특별자산", "산업", "투자", \
                 "배당증", "배당", "채혼", "인덱스", "금융", "연금", "소득공제", "개인연금", "본토"]
+
+industrial = ["연금", "국가철도", "시설관리", "도시관리", "시설", "한국장애인고용", "장애인", "교통안전", \
+                "송파", "소상공인시장진흥"]
 
 fina_word_for_contains = "|".join(["수익", "중도", "일반", "빠른", "보료", "법인카드", "결제대금", "개인경비", \
                                     "판매", "개인여비", "개인지출", "개인", "고용보험", "건강보험", "경비", \
@@ -161,7 +171,7 @@ cost_word_for_contains = "|".join(["활동비", "참가비", "특강비", "소�
                                     "교통비", "통신비", "관리비", "개인경비", "경비", "외근비", "야근비", "지도비", \
                                     "사무실비", "통근비", "영어비", "선교비"])
 
-grou_word_for_contains = "|".join(["대의원회", "성가회", "가회", "동갑회", "성서공회", "성공회", "박물관회", "연구회", \
+even_word_for_contains = "|".join(["대의원회", "성가회", "가회", "동갑회", "성서공회", "성공회", "박물관회", "연구회", \
                                     "돕기회", "동기회", "하나회", "수년회", "아녀회", "청소년회", "청년회", "기념회", \
                                     "수도노회", "나눔회", "소담회", "상당회", "수도회", "사랑회", "수련회", "장로회", \
                                     "섭리회", "만만회", "열매회", "자매회", "신명회", "부모회", "친목회", "총동문회", \
@@ -175,6 +185,8 @@ grou_word_for_contains = "|".join(["대의원회", "성가회", "가회", "동�
                                     "동창회", "국청회", "정기총회", "총회", "자치회", "은친회", "과학회", "의학회", \
                                     "장학회", "학회", "연합회", "선행회", "동호회", "정호회", "진흥회", "수녀회", \
                                     "모금회", "숭모회", "연주회"])
+
+
 
 scho_word_for_contains = "|".join(["조식비", "방과", "급식비", "기숙", "석식", "우유", "조식", "계모임", "급식", "간식", \
                                     "재료", "교재",]) 

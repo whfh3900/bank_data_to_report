@@ -1,13 +1,12 @@
 import pandas as pd
-from glob import glob
-from work import *
 from tqdm import tqdm
 import os
 tqdm.pandas()
 from utils import *
+import sys
 
 
-def case_1(path):
+def case_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -84,14 +83,14 @@ def case_1(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_1_1(path):
+def case_1_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -168,14 +167,14 @@ def case_1_1(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_2(path):
+def case_2(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -281,14 +280,14 @@ def case_2(path):
                     }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_3(path):
+def case_3(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -391,8 +390,8 @@ def case_3(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -400,7 +399,7 @@ def case_3(path):
 
 
 
-def case_4(path):
+def case_4(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -507,15 +506,15 @@ def case_4(path):
                 word_num += 1
             
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_5(path):
+def case_5(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -622,8 +621,8 @@ def case_5(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -631,7 +630,7 @@ def case_5(path):
 
 
 
-def case_6(path):
+def case_6(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -741,8 +740,8 @@ def case_6(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -750,7 +749,7 @@ def case_6(path):
 
 
 
-def case_7(path):
+def case_7(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -852,13 +851,13 @@ def case_7(path):
                                     }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_8(path):
+def case_8(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -969,13 +968,13 @@ def case_8(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_9(path):
+def case_9(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1089,15 +1088,15 @@ def case_9(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_10(path):
+def case_10(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1215,15 +1214,15 @@ def case_10(path):
             
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_10_1(path):
+def case_10_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1330,15 +1329,15 @@ def case_10_1(path):
             
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_10_2(path):
+def case_10_2(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1408,7 +1407,7 @@ def case_10_2(path):
                                     '출처번호': sour_num,
                                     '적요구조': text_stru,
                                     '적요구조일련번호': text_stru_num,
-                                '적요 설명': "%s 계좌에서 %s로(으로) 입금된 내역의 적요이다."%(token_1_mean, token_3_mean) if tran_diff == "입금" else "%s 계좌로 %s로(으로) 이체한 내역의 적요이다."%(token_1_mean, token_3_mean),
+                                    '적요 설명': "%s 계좌에서 %s로(으로) 입금된 내역의 적요이다."%(token_1_mean, token_3_mean) if tran_diff == "입금" else "%s 계좌로 %s로(으로) 이체한 내역의 적요이다."%(token_1_mean, token_3_mean),
                                     '거래코드': tran_code,
                                     '분류': clas,
                                     '분류번호': clas_num,
@@ -1446,14 +1445,14 @@ def case_10_2(path):
             
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_11(path):
+def case_11(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1504,14 +1503,14 @@ def case_11(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_12(path):
+def case_12(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1598,14 +1597,14 @@ def case_12(path):
                                     }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_13(path):
+def case_13(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1720,13 +1719,13 @@ def case_13(path):
                 word_num += 1
             
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
         
         
-def case_14(path):
+def case_14(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1807,15 +1806,15 @@ def case_14(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_15(path):
+def case_15(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1894,13 +1893,13 @@ def case_15(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_16(path):
+def case_16(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -1988,13 +1987,13 @@ def case_16(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_17(path):
+def case_17(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2077,8 +2076,8 @@ def case_17(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -2086,7 +2085,7 @@ def case_17(path):
 
 
 
-def case_18(path):
+def case_18(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2166,8 +2165,8 @@ def case_18(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -2175,7 +2174,7 @@ def case_18(path):
 
 
 
-def case_19(path):
+def case_19(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2249,13 +2248,13 @@ def case_19(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_20(path):
+def case_20(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2340,14 +2339,14 @@ def case_20(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_21(path):
+def case_21(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2430,15 +2429,15 @@ def case_21(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_21_1(path):
+def case_21_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2516,15 +2515,15 @@ def case_21_1(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_22(path):
+def case_22(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2607,14 +2606,14 @@ def case_22(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_23(path):
+def case_23(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2688,13 +2687,13 @@ def case_23(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_24(path):
+def case_24(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2780,13 +2779,13 @@ def case_24(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_25(path):
+def case_25(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2866,13 +2865,13 @@ def case_25(path):
                                     }, ignore_index=True)
             word_num += 1
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_26(path):
+def case_26(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -2958,14 +2957,14 @@ def case_26(path):
                                 }, ignore_index=True)
             
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_27(path):
+def case_27(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3036,15 +3035,15 @@ def case_27(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_27_1(path):
+def case_27_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3109,13 +3108,13 @@ def case_27_1(path):
             word_num += 1
             
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_28(path):
+def case_28(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3195,15 +3194,15 @@ def case_28(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_29(path):
+def case_29(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3318,13 +3317,13 @@ def case_29(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_30(path):
+def case_30(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3402,15 +3401,15 @@ def case_30(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_31(path):
+def case_31(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3490,14 +3489,14 @@ def case_31(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_32(path):
+def case_32(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3597,14 +3596,14 @@ def case_32(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_33(path):
+def case_33(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3704,13 +3703,13 @@ def case_33(path):
                                     }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_34(path):
+def case_34(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3829,14 +3828,14 @@ def case_34(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_35(path):
+def case_35(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3911,15 +3910,15 @@ def case_35(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_36(path):
+def case_36(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -3942,14 +3941,40 @@ def case_36(path):
         min_amou = df.iloc[i]['최소금액']
         max_amou = df.iloc[i]['최대금액']
         
-        tokens = re.split(r'-|－', text_pre)
-        token_1 = tokens[0]
-        token_1_mean = bank_dict.get(token_1, token_1)
-        object_1 = "은행명"
+        token_2 = "모임"
+        token_2_mean = "모임"
+        object_2 = "모임"
         
-        names = find_name(tokens[-1])
-        tokens = tokens[-1]
+        tokens = del_sw(text_pre.replace(token_2, ""))
         
+        word_num = 0
+        for i in tokens.split():
+            token_1 = i
+            token_1_mean = token_1
+            object_1 = "모임명"
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s 으로(로) 입금된 내역의 적요이다."%token_2_mean if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%token_2_mean,
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_1,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+        
+            word_num += 1
+
         new_df = new_df.append({'확인용': num,
                                 '적요': text,
                                 '적요일련번호': text_num,
@@ -3958,84 +3983,31 @@ def case_36(path):
                                 '출처번호': sour_num,
                                 '적요구조': text_stru,
                                 '적요구조일련번호': text_stru_num,
-                                '적요 설명': "%s 계좌에서 입금된 내역의 적요이다."%token_1_mean if tran_diff == "입금" else "%s 계좌로 이체한 내역의 적요이다."%token_1_mean,
+                                '적요 설명': "%s 으로(로) 입금된 내역의 적요이다."%token_2_mean if tran_diff == "입금" else "%s 으로(로) 이체한 내역의 적요이다."%token_2_mean,
                                 '거래코드': tran_code,
                                 '분류': clas,
                                 '분류번호': clas_num,
                                 '최소금액': min_amou,
                                 '최대금액': max_amou,
-                                '단어': token_1,
-                                '단어일련번호':0,
-                                '단어의미':token_1_mean,
-                                '개체명': object_1,
+                                '단어': token_2,
+                                '단어일련번호':word_num,
+                                '단어의미':token_2_mean,
+                                '개체명': object_2,
                                 '완료여부':1,
                                 }, ignore_index=True)
-        
-        word_num = 1
-        for i in names:
-            token_2 = i
-            token_2_mean = "이름"
-            object_2 = "이름"
-            tokens = tokens.replace(token_2, "")
-            new_df = new_df.append({'확인용': num,
-                                    '적요': text,
-                                    '적요일련번호': text_num,
-                                    '입출금구분': tran_diff,
-                                    '데이터셋출처': data_sour,
-                                    '출처번호': sour_num,
-                                    '적요구조': text_stru,
-                                    '적요구조일련번호': text_stru_num,
-                                    '적요 설명': token_1_mean+" 계좌에서 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 이체한 내역의 적요이다.",
-                                    '거래코드': tran_code,
-                                    '분류': clas,
-                                    '분류번호': clas_num,
-                                    '최소금액': min_amou,
-                                    '최대금액': max_amou,
-                                    '단어': token_2,
-                                    '단어일련번호':word_num,
-                                    '단어의미':token_2_mean,
-                                    '개체명': object_2,
-                                    '완료여부':1,
-                                    }, ignore_index=True)
-            word_num +=1
-        tokens = re.sub(r'[^\w\s]', ' ', tokens)
-        for i in tokens.split():
-            token_3 = i
-            token_3_mean = token_3
-            object_3 = "알수없음"
-            new_df = new_df.append({'확인용': num,
-                                    '적요': text,
-                                    '적요일련번호': text_num,
-                                    '입출금구분': tran_diff,
-                                    '데이터셋출처': data_sour,
-                                    '출처번호': sour_num,
-                                    '적요구조': text_stru,
-                                    '적요구조일련번호': text_stru_num,
-                                    '적요 설명': token_1_mean+" 계좌에서 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 이체한 내역의 적요이다.",
-                                    '거래코드': tran_code,
-                                    '분류': clas,
-                                    '분류번호': clas_num,
-                                    '최소금액': min_amou,
-                                    '최대금액': max_amou,
-                                    '단어': token_3,
-                                    '단어일련번호':word_num,
-                                    '단어의미':token_3_mean,
-                                    '개체명': object_3,
-                                    '완료여부':1,
-                                    }, ignore_index=True)
-            word_num += 1
+
             
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_37(path):
+def case_37(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4119,8 +4091,8 @@ def case_37(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -4128,7 +4100,7 @@ def case_37(path):
 
 
 
-def case_38(path):
+def case_38(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4202,8 +4174,8 @@ def case_38(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -4211,7 +4183,7 @@ def case_38(path):
 
 
 
-def case_39(path):
+def case_39(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4292,8 +4264,8 @@ def case_39(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -4301,7 +4273,7 @@ def case_39(path):
 
 
 
-def case_39_1(path):
+def case_39_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4387,14 +4359,14 @@ def case_39_1(path):
 
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_40(path):
+def case_40(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4472,15 +4444,15 @@ def case_40(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_41(path):
+def case_41(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4559,14 +4531,14 @@ def case_41(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_41_1(path):
+def case_41_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4644,8 +4616,8 @@ def case_41_1(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -4653,7 +4625,7 @@ def case_41_1(path):
 
 
 
-def case_42(path):
+def case_42(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4734,15 +4706,15 @@ def case_42(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_43(path):
+def case_43(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4824,14 +4796,14 @@ def case_43(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_43_1(path):
+def case_43_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4911,13 +4883,13 @@ def case_43_1(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_44(path):
+def case_44(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -4998,14 +4970,14 @@ def case_44(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_45(path):
+def case_45(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5083,15 +5055,15 @@ def case_45(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_46(path):
+def case_46(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5171,15 +5143,15 @@ def case_46(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 ##  나중에
-def case_47(path):
+def case_47(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5332,8 +5304,8 @@ def case_47(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -5341,7 +5313,7 @@ def case_47(path):
 
 
 
-def case_48(path):
+def case_48(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5416,14 +5388,14 @@ def case_48(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_49(path):
+def case_49(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5502,15 +5474,15 @@ def case_49(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_50(path):
+def case_50(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5585,8 +5557,8 @@ def case_50(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -5594,7 +5566,7 @@ def case_50(path):
 
 
 
-def case_51(path):
+def case_51(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5670,14 +5642,14 @@ def case_51(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_52(path):
+def case_52(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5760,14 +5732,14 @@ def case_52(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_53(path):
+def case_53(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5845,15 +5817,15 @@ def case_53(path):
 
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_54(path):
+def case_54(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -5956,13 +5928,13 @@ def case_54(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_55(path):
+def case_55(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6044,15 +6016,15 @@ def case_55(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_55_1(path):
+def case_55_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6134,15 +6106,15 @@ def case_55_1(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_56(path):
+def case_56(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6222,15 +6194,15 @@ def case_56(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_57(path):
+def case_57(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6339,8 +6311,8 @@ def case_57(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -6348,7 +6320,7 @@ def case_57(path):
 
 
 
-def case_58(path):
+def case_58(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6427,15 +6399,15 @@ def case_58(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_59(path):
+def case_59(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6514,15 +6486,15 @@ def case_59(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_60(path):
+def case_60(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6601,14 +6573,14 @@ def case_60(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_61(path):
+def case_61(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6688,14 +6660,14 @@ def case_61(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_62(path):
+def case_62(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6777,15 +6749,15 @@ def case_62(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_63(path):
+def case_63(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6864,14 +6836,14 @@ def case_63(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_64(path):
+def case_64(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -6952,14 +6924,14 @@ def case_64(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_65(path):
+def case_65(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7038,15 +7010,15 @@ def case_65(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_66(path):
+def case_66(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7102,15 +7074,15 @@ def case_66(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_67(path):
+def case_67(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7191,14 +7163,14 @@ def case_67(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_67_1(path):
+def case_67_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7275,14 +7247,14 @@ def case_67_1(path):
             word_num+=1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_68(path):
+def case_68(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7361,14 +7333,14 @@ def case_68(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_69(path):
+def case_69(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7449,14 +7421,14 @@ def case_69(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_69_1(path):
+def case_69_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7536,14 +7508,14 @@ def case_69_1(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_69_2(path):
+def case_69_2(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7622,13 +7594,13 @@ def case_69_2(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_70(path):
+def case_70(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7710,8 +7682,8 @@ def case_70(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -7719,7 +7691,7 @@ def case_70(path):
 
 
 
-def case_71(path):
+def case_71(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7830,8 +7802,8 @@ def case_71(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -7841,7 +7813,7 @@ def case_71(path):
 
 
 
-def case_72(path):
+def case_72(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -7956,8 +7928,8 @@ def case_72(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -7965,7 +7937,7 @@ def case_72(path):
 
 
 
-def case_73(path):
+def case_73(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8048,15 +8020,15 @@ def case_73(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_74(path):
+def case_74(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8138,14 +8110,14 @@ def case_74(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_75(path):
+def case_75(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8237,15 +8209,15 @@ def case_75(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_76(path):
+def case_76(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8326,8 +8298,8 @@ def case_76(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -8335,7 +8307,7 @@ def case_76(path):
 
 
 
-def case_77(path):
+def case_77(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8358,39 +8330,30 @@ def case_77(path):
         min_amou = df.iloc[i]['최소금액']
         max_amou = df.iloc[i]['최대금액']
 
-        token_1 = text_pre[0:2]
-        token_1_mean = bank_dict.get(token_1, token_1)
-        object_1 = "은행명"
         
-        names = find_name(text_pre)
-        tokens = text_pre.replace(token_1, "")
+        token_3 = "공단"
+        token_3_mean = "공단"
+        object_3 = "공단"
+        tokens = del_sw(text_pre.replace(token_3, ""))
 
-        new_df = new_df.append({'확인용': num,
-                                '적요': text,
-                                '적요일련번호': text_num,
-                                '입출금구분': tran_diff,
-                                '데이터셋출처': data_sour,
-                                '출처번호': sour_num,
-                                '적요구조': text_stru,
-                                '적요구조일련번호': text_stru_num,
-                                '적요 설명': token_1_mean+" 계좌에서 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 이체한 내역의 적요이다.",
-                                '거래코드': tran_code,
-                                '분류': clas,
-                                '분류번호': clas_num,
-                                '최소금액': min_amou,
-                                '최대금액': max_amou,
-                                '단어': token_1,
-                                '단어일련번호':0,
-                                '단어의미':token_1_mean,
-                                '개체명': object_1,
-                                '완료여부':1,
-                                }, ignore_index=True)
-        word_num = 1
-        for i in names:
-            token_2 = i
-            token_2_mean = "이름"
-            object_2 = "이름"
-            tokens = tokens.replace(token_2, "")
+        token_2 = ""
+        token_2_mean = ""
+        object_2 = "공단명"
+        for i in industrial:
+            if tokens.endswith(i):
+                token_2 = i
+                token_2_mean = token_2
+                object_2 = "공단명"
+                
+                tokens = del_sw(tokens.replace(token_2, ""))
+                break
+
+            
+        word_num = 0
+        for i in tokens.split():
+            token_1 = i
+            token_1_mean = token_1
+            object_1 = "알수없음"
             new_df = new_df.append({'확인용': num,
                                     '적요': text,
                                     '적요일련번호': text_num,
@@ -8399,7 +8362,30 @@ def case_77(path):
                                     '출처번호': sour_num,
                                     '적요구조': text_stru,
                                     '적요구조일련번호': text_stru_num,
-                                    '적요 설명': token_1_mean+" 계좌에서 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 이체한 내역의 적요이다.",
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                    '거래코드': tran_code,
+                                    '분류': clas,
+                                    '분류번호': clas_num,
+                                    '최소금액': min_amou,
+                                    '최대금액': max_amou,
+                                    '단어': token_1,
+                                    '단어일련번호':word_num,
+                                    '단어의미':token_1_mean,
+                                    '개체명': object_1,
+                                    '완료여부':1,
+                                    }, ignore_index=True)
+            word_num += 1
+
+        if token_2 != "":
+            new_df = new_df.append({'확인용': num,
+                                    '적요': text,
+                                    '적요일련번호': text_num,
+                                    '입출금구분': tran_diff,
+                                    '데이터셋출처': data_sour,
+                                    '출처번호': sour_num,
+                                    '적요구조': text_stru,
+                                    '적요구조일련번호': text_stru_num,
+                                    '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
                                     '거래코드': tran_code,
                                     '분류': clas,
                                     '분류번호': clas_num,
@@ -8412,44 +8398,38 @@ def case_77(path):
                                     '완료여부':1,
                                     }, ignore_index=True)
             word_num += 1
-
-        for i in del_sw(tokens).split():
-            token_3 = i
-            token_3_mean = token_3
-            object_3 = "알수없음"
-            new_df = new_df.append({'확인용': num,
-                                    '적요': text,
-                                    '적요일련번호': text_num,
-                                    '입출금구분': tran_diff,
-                                    '데이터셋출처': data_sour,
-                                    '출처번호': sour_num,
-                                    '적요구조': text_stru,
-                                    '적요구조일련번호': text_stru_num,
-                                    '적요 설명': token_1_mean+" 계좌에서 입금된 내역의 적요이다." if tran_diff == "입금" else token_1_mean+" 계좌로 이체한 내역의 적요이다.",
-                                    '거래코드': tran_code,
-                                    '분류': clas,
-                                    '분류번호': clas_num,
-                                    '최소금액': min_amou,
-                                    '최대금액': max_amou,
-                                    '단어': token_3,
-                                    '단어일련번호':word_num,
-                                    '단어의미':token_3_mean,
-                                    '개체명': object_3,
-                                    '완료여부':1,
-                                    }, ignore_index=True)
-            word_num += 1
-            
+        new_df = new_df.append({'확인용': num,
+                                '적요': text,
+                                '적요일련번호': text_num,
+                                '입출금구분': tran_diff,
+                                '데이터셋출처': data_sour,
+                                '출처번호': sour_num,
+                                '적요구조': text_stru,
+                                '적요구조일련번호': text_stru_num,
+                                '적요 설명': "%s%s 으로(로) 입금된 내역의 적요이다."%(token_2_mean, token_3_mean) if tran_diff == "입금" else "%s%s 으로(로) 이체한 내역의 적요이다."%(token_2_mean, token_3_mean),
+                                '거래코드': tran_code,
+                                '분류': clas,
+                                '분류번호': clas_num,
+                                '최소금액': min_amou,
+                                '최대금액': max_amou,
+                                '단어': token_3,
+                                '단어일련번호':word_num,
+                                '단어의미':token_3_mean,
+                                '개체명': object_3,
+                                '완료여부':1,
+                                }, ignore_index=True)
+        
             
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_78(path):
+def case_78(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8533,8 +8513,8 @@ def case_78(path):
             
             
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -8542,7 +8522,7 @@ def case_78(path):
 
 
 
-def case_79(path):
+def case_79(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8637,8 +8617,8 @@ def case_79(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -8646,7 +8626,7 @@ def case_79(path):
 
 
 
-def case_80(path):
+def case_80(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8729,15 +8709,15 @@ def case_80(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_80_1(path):
+def case_80_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8820,15 +8800,15 @@ def case_80_1(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_80_2(path):
+def case_80_2(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8910,14 +8890,14 @@ def case_80_2(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_80_3(path):
+def case_80_3(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -8997,15 +8977,15 @@ def case_80_3(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_81(path):
+def case_81(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9092,15 +9072,15 @@ def case_81(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_81_1(path):
+def case_81_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9179,15 +9159,15 @@ def case_81_1(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_82(path):
+def case_82(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9268,14 +9248,14 @@ def case_82(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_83(path):
+def case_83(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9357,13 +9337,13 @@ def case_83(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_84(path):
+def case_84(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9480,14 +9460,14 @@ def case_84(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_85(path):
+def case_85(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9567,15 +9547,15 @@ def case_85(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_86(path):
+def case_86(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9658,13 +9638,13 @@ def case_86(path):
             
             
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_87(path):
+def case_87(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9745,15 +9725,15 @@ def case_87(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_88(path):
+def case_88(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9833,8 +9813,8 @@ def case_88(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -9842,7 +9822,7 @@ def case_88(path):
 
 
 
-def case_89(path):
+def case_89(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9928,14 +9908,14 @@ def case_89(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
     
     
-def case_89_1(path):
+def case_89_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -9992,15 +9972,15 @@ def case_89_1(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_89_2(path):
+def case_89_2(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10079,14 +10059,14 @@ def case_89_2(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_90(path):
+def case_90(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10168,14 +10148,14 @@ def case_90(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_91(path):
+def case_91(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10257,15 +10237,15 @@ def case_91(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_92(path):
+def case_92(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10347,15 +10327,15 @@ def case_92(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_93(path):
+def case_93(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10441,8 +10421,8 @@ def case_93(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -10450,7 +10430,7 @@ def case_93(path):
 
 
 
-def case_94(path):
+def case_94(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10534,8 +10514,8 @@ def case_94(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -10543,7 +10523,7 @@ def case_94(path):
 
 
 
-def case_94_1(path):
+def case_94_1(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10622,8 +10602,8 @@ def case_94_1(path):
             word_num += 1
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -10631,7 +10611,7 @@ def case_94_1(path):
 
 
 
-def case_95(path):
+def case_95(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10717,15 +10697,15 @@ def case_95(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_96(path):
+def case_96(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10780,14 +10760,14 @@ def case_96(path):
         
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_97(path):
+def case_97(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10866,14 +10846,14 @@ def case_97(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_98(path):
+def case_98(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -10958,15 +10938,15 @@ def case_98(path):
                                 }, ignore_index=True)
         
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_99(path):
+def case_99(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11047,14 +11027,14 @@ def case_99(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_100(path):
+def case_100(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11165,15 +11145,15 @@ def case_100(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_101(path):
+def case_101(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11265,14 +11245,14 @@ def case_101(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_102(path):
+def case_102(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11352,15 +11332,15 @@ def case_102(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_103(path):
+def case_103(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11384,7 +11364,7 @@ def case_103(path):
         max_amou = df.iloc[i]['최대금액']
         
 
-        for i in grou_word_for_contains.split("|"):
+        for i in even_word_for_contains.split("|"):
             if text_pre.endswith(i):
                 token_2 = i
                 token_2_mean = token_2
@@ -11442,14 +11422,14 @@ def case_103(path):
         
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_104(path):
+def case_104(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11561,13 +11541,13 @@ def case_104(path):
                                 }, ignore_index=True)
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_105(path):
+def case_105(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11679,14 +11659,14 @@ def case_105(path):
                                 }, ignore_index=True)
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_106(path):
+def case_106(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11801,13 +11781,13 @@ def case_106(path):
                                 }, ignore_index=True)
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
-def case_107(path):
+def case_107(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -11927,14 +11907,14 @@ def case_107(path):
                                 }, ignore_index=True)
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_108(path):
+def case_108(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -12050,14 +12030,14 @@ def case_108(path):
                                 }, ignore_index=True)
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
-def case_109(path):
+def case_109(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -12133,15 +12113,15 @@ def case_109(path):
 
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_110(path):
+def case_110(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -12254,15 +12234,15 @@ def case_110(path):
                                 }, ignore_index=True)
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
 
 
 
-def case_111(path):
+def case_111(path, output_path):
     ### input: DataFrame
     ### output: DataFrame
     df = pd.read_csv(path, encoding="utf-8-sig", index_col=0)
@@ -12345,8 +12325,8 @@ def case_111(path):
                                 }, ignore_index=True)
 
     result_file_name = os.path.basename(path).split(".")[0]+"_complete.csv"
-    new_path = "../result/dataset/case"
-    result_path = os.path.join(new_path, result_file_name)
+    
+    result_path = os.path.join(output_path, result_file_name)
     new_df.to_csv(result_path, encoding="utf-8-sig")
     return new_df
 
@@ -12355,133 +12335,135 @@ def case_111(path):
 
 
 if __name__ == "__main__":
-    # case_1("../data/dataset/case/case_1.csv")
-    # case_1_1("../data/dataset/case/case_1_1.csv")
-    # case_2("../data/dataset/case/case_2.csv")
-    # case_3("../data/dataset/case/case_3.csv")
-    # case_4("../data/dataset/case/case_4.csv")
-    # case_5("../data/dataset/case/case_5.csv")
-    # case_6("../data/dataset/case/case_6.csv")
-    # case_7("../data/dataset/case/case_7.csv")
-    # case_8("../data/dataset/case/case_8.csv")
-    # case_9("../data/dataset/case/case_9.csv")
-    case_10("../data/dataset/case/case_10.csv")
-    # case_10_1("../data/dataset/case/case_10_1.csv")
-    # case_10_2("../data/dataset/case/case_10_2.csv")
-    # case_11("../data/dataset/case/case_11.csv")
-    # case_12("../data/dataset/case/case_12.csv")
-    # case_13("../data/dataset/case/case_13.csv")
-    # case_14("../data/dataset/case/case_14.csv")
-    # case_15("../data/dataset/case/case_15.csv")
-    # case_16("../data/dataset/case/case_16.csv")
-    # case_17("../data/dataset/case/case_17.csv")
-    # case_18("../data/dataset/case/case_18.csv")
-    # case_19("../data/dataset/case/case_19.csv")
-    # case_20("../data/dataset/case/case_20.csv")
-    # case_21("../data/dataset/case/case_21.csv")
-    # case_21_1("../data/dataset/case/case_21_1.csv")
-    # case_22("../data/dataset/case/case_22.csv")
-    # case_23("../data/dataset/case/case_23.csv")
-    # case_24("../data/dataset/case/case_24.csv")
-    # case_25("../data/dataset/case/case_25.csv")
-    # case_26("../data/dataset/case/case_26.csv")
-    # case_27("../data/dataset/case/case_27.csv")
-    # case_27_1("../data/dataset/case/case_27_1.csv")
-    # case_28("../data/dataset/case/case_28.csv")
-    # case_29("../data/dataset/case/case_29.csv")
-    # case_30("../data/dataset/case/case_30.csv")
-    # case_31("../data/dataset/case/case_31.csv")
-    # case_32("../data/dataset/case/case_32.csv")
-    # case_33("../data/dataset/case/case_33.csv")
-    # case_34("../data/dataset/case/case_34.csv")
-    # case_35("../data/dataset/case/case_35.csv")
-    # case_36("../data/dataset/case/case_36.csv")
-    # case_37("../data/dataset/case/case_37.csv")
-    # case_38("../data/dataset/case/case_38.csv")
-    # case_39("../data/dataset/case/case_39.csv")
-    # case_39_1("../data/dataset/case/case_39_1.csv")
-    # case_40("../data/dataset/case/case_40.csv")
-    # case_41("../data/dataset/case/case_41.csv")
-    # case_41_1("../data/dataset/case/case_41_1.csv")
-    # case_42("../data/dataset/case/case_42.csv")
-    # case_43("../data/dataset/case/case_43.csv")
-    # case_43_1("../data/dataset/case/case_43_1.csv")
-    # case_44("../data/dataset/case/case_44.csv")
-    # case_45("../data/dataset/case/case_45.csv")
-    # case_46("../data/dataset/case/case_46.csv")
-    # case_47("../data/dataset/case/case_47.csv")
-    # case_48("../data/dataset/case/case_48.csv")
-    # case_49("../data/dataset/case/case_49.csv")
-    # case_50("../data/dataset/case/case_50.csv")
-    # case_51("../data/dataset/case/case_51.csv")
-    # case_52("../data/dataset/case/case_52.csv")
-    # case_53("../data/dataset/case/case_53.csv")
-    # case_54("../data/dataset/case/case_54.csv")
-    # case_55("../data/dataset/case/case_55.csv")
-    # case_55_1("../data/dataset/case/case_55_1.csv")
-    # case_56("../data/dataset/case/case_56.csv")
-    # case_57("../data/dataset/case/case_57.csv")
-    # case_58("../data/dataset/case/case_58.csv")
-    # case_59("../data/dataset/case/case_59.csv")
-    # case_60("../data/dataset/case/case_60.csv")
-    # case_61("../data/dataset/case/case_61.csv")
-    # case_62("../data/dataset/case/case_62.csv")
-    # case_63("../data/dataset/case/case_63.csv")
-    # case_64("../data/dataset/case/case_64.csv")
-    # case_65("../data/dataset/case/case_65.csv")
-    # case_66("../data/dataset/case/case_66.csv")
-    # case_67("../data/dataset/case/case_67.csv")
-    # case_67_1("../data/dataset/case/case_67_1.csv")
-    # case_68("../data/dataset/case/case_68.csv")
-    # case_69("../data/dataset/case/case_69.csv")
-    # case_69_1("../data/dataset/case/case_69_1.csv")
-    # case_69_2("../data/dataset/case/case_69_2.csv")
-    # case_70("../data/dataset/case/case_70.csv")
-    # case_71("../data/dataset/case/case_71.csv")
-    # case_72("../data/dataset/case/case_72.csv")
-    # case_73("../data/dataset/case/case_73.csv")
-    # case_74("../data/dataset/case/case_74.csv")
-    # case_75("../data/dataset/case/case_75.csv")
-    # case_76("../data/dataset/case/case_76.csv")
-    # case_77("../data/dataset/case/case_77.csv")
-    # case_78("../data/dataset/case/case_78.csv")
-    # case_79("../data/dataset/case/case_79.csv")
-    # case_80("../data/dataset/case/case_80.csv")
-    # case_80_1("../data/dataset/case/case_80_1.csv")
-    # case_80_2("../data/dataset/case/case_80_2.csv")
-    # case_80_3("../data/dataset/case/case_80_3.csv")
-    # case_81("../data/dataset/case/case_81.csv")
-    # case_81_1("../data/dataset/case/case_81_1.csv")
-    # case_82("../data/dataset/case/case_82.csv")
-    # case_83("../data/dataset/case/case_83.csv")
-    # case_84("../data/dataset/case/case_84.csv")
-    # case_85("../data/dataset/case/case_85.csv")
-    # case_86("../data/dataset/case/case_86.csv")
-    # case_87("../data/dataset/case/case_87.csv")
-    # case_88("../data/dataset/case/case_88.csv")
-    # case_89("../data/dataset/case/case_89.csv")
-    # case_89_1("../data/dataset/case/case_89_1.csv")
-    # case_89_2("../data/dataset/case/case_89_2.csv")
-    # case_90("../data/dataset/case/case_90.csv")
-    # case_91("../data/dataset/case/case_91.csv")
-    # case_92("../data/dataset/case/case_92.csv")
-    # case_93("../data/dataset/case/case_93.csv")
-    # case_94("../data/dataset/case/case_94.csv")
-    # case_94_1("../data/dataset/case/case_94_1.csv")
-    # case_95("../data/dataset/case/case_95.csv")
-    # case_96("../data/dataset/case/case_96.csv")
-    # case_97("../data/dataset/case/case_97.csv")
-    # case_98("../data/dataset/case/case_98.csv")
-    # case_99("../data/dataset/case/case_99.csv")
-    # case_100("../data/dataset/case/case_100.csv")
-    # case_101("../data/dataset/case/case_101.csv")
-    # case_102("../data/dataset/case/case_102.csv")
-    # case_103("../data/dataset/case/case_103.csv")
-    # case_104("../data/dataset/case/case_104.csv")
-    # case_105("../data/dataset/case/case_105.csv")
-    # case_106("../data/dataset/case/case_106.csv")
-    # case_107("../data/dataset/case/case_107.csv")
-    # case_108("../data/dataset/case/case_108.csv")
-    # case_109("../data/dataset/case/case_109.csv")
-    # case_110("../data/dataset/case/case_110.csv")
-    # case_111("../data/dataset/case/case_111.csv")
+    input_path = sys.argv[1]
+    output_path = sys.argv[2]
+    case_1(os.path.join(input_path, "case_1.csv"), output_path)
+    case_1_1(os.path.join(input_path, "case_1_1.csv"), output_path)
+    case_2(os.path.join(input_path, "case_2.csv"), output_path)
+    case_3(os.path.join(input_path, "case_3.csv"), output_path)
+    case_4(os.path.join(input_path, "case_4.csv"), output_path)
+    case_5(os.path.join(input_path, "case_5.csv"), output_path)
+    case_6(os.path.join(input_path, "case_6.csv"), output_path)
+    case_7(os.path.join(input_path, "case_7.csv"), output_path)
+    case_8(os.path.join(input_path, "case_8.csv"), output_path)
+    case_9(os.path.join(input_path, "case_9.csv"), output_path)
+    case_10(os.path.join(input_path, "case_10.csv"), output_path)
+    case_10_1(os.path.join(input_path, "case_10_1.csv"), output_path)
+    case_10_2(os.path.join(input_path, "case_10_2.csv"), output_path)
+    case_11(os.path.join(input_path, "case_11.csv"), output_path)
+    case_12(os.path.join(input_path, "case_12.csv"), output_path)
+    case_13(os.path.join(input_path, "case_13.csv"), output_path)
+    case_14(os.path.join(input_path, "case_14.csv"), output_path)
+    case_15(os.path.join(input_path, "case_15.csv"), output_path)
+    case_16(os.path.join(input_path, "case_16.csv"), output_path)
+    case_17(os.path.join(input_path, "case_17.csv"), output_path)
+    case_18(os.path.join(input_path, "case_18.csv"), output_path)
+    case_19(os.path.join(input_path, "case_19.csv"), output_path)
+    case_20(os.path.join(input_path, "case_20.csv"), output_path)
+    case_21(os.path.join(input_path, "case_21.csv"), output_path)
+    case_21_1(os.path.join(input_path, "case_21_1.csv"), output_path)
+    case_22(os.path.join(input_path, "case_22.csv"), output_path)
+    case_23(os.path.join(input_path, "case_23.csv"), output_path)
+    case_24(os.path.join(input_path, "case_24.csv"), output_path)
+    case_25(os.path.join(input_path, "case_25.csv"), output_path)
+    case_26(os.path.join(input_path, "case_26.csv"), output_path)
+    case_27(os.path.join(input_path, "case_27.csv"), output_path)
+    case_27_1(os.path.join(input_path, "case_27_1.csv"), output_path)
+    case_28(os.path.join(input_path, "case_28.csv"), output_path)
+    case_29(os.path.join(input_path, "case_29.csv"), output_path)
+    case_30(os.path.join(input_path, "case_30.csv"), output_path)
+    case_31(os.path.join(input_path, "case_31.csv"), output_path)
+    case_32(os.path.join(input_path, "case_32.csv"), output_path)
+    case_33(os.path.join(input_path, "case_33.csv"), output_path)
+    case_34(os.path.join(input_path, "case_34.csv"), output_path)
+    case_35(os.path.join(input_path, "case_35.csv"), output_path)
+    case_36(os.path.join(input_path, "case_36.csv"), output_path)
+    case_37(os.path.join(input_path, "case_37.csv"), output_path)
+    case_38(os.path.join(input_path, "case_38.csv"), output_path)
+    case_39(os.path.join(input_path, "case_39.csv"), output_path)
+    case_39_1(os.path.join(input_path, "case_39_1.csv"), output_path)
+    case_40(os.path.join(input_path, "case_40.csv"), output_path)
+    case_41(os.path.join(input_path, "case_41.csv"), output_path)
+    case_41_1(os.path.join(input_path, "case_41_1.csv"), output_path)
+    case_42(os.path.join(input_path, "case_42.csv"), output_path)
+    case_43(os.path.join(input_path, "case_43.csv"), output_path)
+    case_43_1(os.path.join(input_path, "case_43_1.csv"), output_path)
+    case_44(os.path.join(input_path, "case_44.csv"), output_path)
+    case_45(os.path.join(input_path, "case_45.csv"), output_path)
+    case_46(os.path.join(input_path, "case_46.csv"), output_path)
+    case_47(os.path.join(input_path, "case_47.csv"), output_path)
+    case_48(os.path.join(input_path, "case_48.csv"), output_path)
+    case_49(os.path.join(input_path, "case_49.csv"), output_path)
+    case_50(os.path.join(input_path, "case_50.csv"), output_path)
+    case_51(os.path.join(input_path, "case_51.csv"), output_path)
+    case_52(os.path.join(input_path, "case_52.csv"), output_path)
+    case_53(os.path.join(input_path, "case_53.csv"), output_path)
+    case_54(os.path.join(input_path, "case_54.csv"), output_path)
+    case_55(os.path.join(input_path, "case_55.csv"), output_path)
+    case_55_1(os.path.join(input_path, "case_55_1.csv"), output_path)
+    case_56(os.path.join(input_path, "case_56.csv"), output_path)
+    case_57(os.path.join(input_path, "case_57.csv"), output_path)
+    case_58(os.path.join(input_path, "case_58.csv"), output_path)
+    case_59(os.path.join(input_path, "case_59.csv"), output_path)
+    case_60(os.path.join(input_path, "case_60.csv"), output_path)
+    case_61(os.path.join(input_path, "case_61.csv"), output_path)
+    case_62(os.path.join(input_path, "case_62.csv"), output_path)
+    case_63(os.path.join(input_path, "case_63.csv"), output_path)
+    case_64(os.path.join(input_path, "case_64.csv"), output_path)
+    case_65(os.path.join(input_path, "case_65.csv"), output_path)
+    case_66(os.path.join(input_path, "case_66.csv"), output_path)
+    case_67(os.path.join(input_path, "case_67.csv"), output_path)
+    case_67_1(os.path.join(input_path, "case_67_1.csv"), output_path)
+    case_68(os.path.join(input_path, "case_68.csv"), output_path)
+    case_69(os.path.join(input_path, "case_69.csv"), output_path)
+    case_69_1(os.path.join(input_path, "case_69_1.csv"), output_path)
+    case_69_2(os.path.join(input_path, "case_69_2.csv"), output_path)
+    case_70(os.path.join(input_path, "case_70.csv"), output_path)
+    case_71(os.path.join(input_path, "case_71.csv"), output_path)
+    case_72(os.path.join(input_path, "case_72.csv"), output_path)
+    case_73(os.path.join(input_path, "case_73.csv"), output_path)
+    case_74(os.path.join(input_path, "case_74.csv"), output_path)
+    case_75(os.path.join(input_path, "case_75.csv"), output_path)
+    case_76(os.path.join(input_path, "case_76.csv"), output_path)
+    case_77(os.path.join(input_path, "case_77.csv"), output_path)
+    case_78(os.path.join(input_path, "case_78.csv"), output_path)
+    case_79(os.path.join(input_path, "case_79.csv"), output_path)
+    case_80(os.path.join(input_path, "case_80.csv"), output_path)
+    case_80_1(os.path.join(input_path, "case_80_1.csv"), output_path)
+    case_80_2(os.path.join(input_path, "case_80_2.csv"), output_path)
+    case_80_3(os.path.join(input_path, "case_80_3.csv"), output_path)
+    case_81(os.path.join(input_path, "case_81.csv"), output_path)
+    case_81_1(os.path.join(input_path, "case_81_1.csv"), output_path)
+    case_82(os.path.join(input_path, "case_82.csv"), output_path)
+    case_83(os.path.join(input_path, "case_83.csv"), output_path)
+    case_84(os.path.join(input_path, "case_84.csv"), output_path)
+    case_85(os.path.join(input_path, "case_85.csv"), output_path)
+    case_86(os.path.join(input_path, "case_86.csv"), output_path)
+    case_87(os.path.join(input_path, "case_87.csv"), output_path)
+    case_88(os.path.join(input_path, "case_88.csv"), output_path)
+    case_89(os.path.join(input_path, "case_89.csv"), output_path)
+    case_89_1(os.path.join(input_path, "case_89_1.csv"), output_path)
+    case_89_2(os.path.join(input_path, "case_89_2.csv"), output_path)
+    case_90(os.path.join(input_path, "case_90.csv"), output_path)
+    case_91(os.path.join(input_path, "case_91.csv"), output_path)
+    case_92(os.path.join(input_path, "case_92.csv"), output_path)
+    case_93(os.path.join(input_path, "case_93.csv"), output_path)
+    case_94(os.path.join(input_path, "case_94.csv"), output_path)
+    case_94_1(os.path.join(input_path, "case_94_1.csv"), output_path)
+    case_95(os.path.join(input_path, "case_95.csv"), output_path)
+    case_96(os.path.join(input_path, "case_96.csv"), output_path)
+    case_97(os.path.join(input_path, "case_97.csv"), output_path)
+    case_98(os.path.join(input_path, "case_98.csv"), output_path)
+    case_99(os.path.join(input_path, "case_99.csv"), output_path)
+    case_100(os.path.join(input_path, "case_100.csv"), output_path)
+    case_101(os.path.join(input_path, "case_101.csv"), output_path)
+    case_102(os.path.join(input_path, "case_102.csv"), output_path)
+    case_103(os.path.join(input_path, "case_103.csv"), output_path)
+    case_104(os.path.join(input_path, "case_104.csv"), output_path)
+    case_105(os.path.join(input_path, "case_105.csv"), output_path)
+    case_106(os.path.join(input_path, "case_106.csv"), output_path)
+    case_107(os.path.join(input_path, "case_107.csv"), output_path)
+    case_108(os.path.join(input_path, "case_108.csv"), output_path)
+    case_109(os.path.join(input_path, "case_109.csv"), output_path)
+    case_110(os.path.join(input_path, "case_110.csv"), output_path)
+    case_111(os.path.join(input_path, "case_111.csv"), output_path)
